@@ -36,39 +36,15 @@
 
       <hr />
 
-      <!-- <span class="text-muted mr-1">尺寸 :</span>
-      <div class="btn-group btn-group-toggle">
-        <label
-          class="btn btn-outline-secondary"
-          :class="{'active': propsData.description === 'S'}"
-        >
-          <input type="radio" name="buy-size" value="S" v-model="propsData.description" /> S
-        </label>
-        <label
-          class="btn btn-outline-secondary"
-          :class="{'active': propsData.description === 'M'}"
-        >
-          <input type="radio" name="buy-size" value="M" v-model="propsData.description" /> M
-        </label>
-        <label
-          class="btn btn-outline-secondary"
-          :class="{'active': propsData.description === 'L'}"
-        >
-          <input type="radio" name="buy-size" value="L" v-model="propsData.description" /> L
-        </label>
-        <label
-          class="btn btn-outline-secondary"
-          :class="{'active': propsData.description === 'XL'}"
-        >
-          <input type="radio" name="buy-size" value="XL" v-model="propsData.description" /> XL
-        </label>
-      </div>-->
-
       <div class="input-group mt-3">
         <select class="form-control mr-3" v-model="propsData.num">
           <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{propsData.unit}}</option>
         </select>
-        <button class="btn btn-primary" @click="addCart(propsData.id, propsData.num)">
+        <button
+          class="btn btn-primary"
+          :disabled="isDisabled === propsData.id"
+          @click="addCart(propsData.id, propsData.num)"
+        >
           <i class="fas fa-spinner fa-spin" v-if="filterLoadingItem === propsData.id"></i>
           加入購物車
         </button>
@@ -87,7 +63,8 @@ export default {
 
   data () {
     return {
-      filterLoadingItem: ''
+      filterLoadingItem: '',
+      isDisabled: ''
     }
   },
 
@@ -96,6 +73,7 @@ export default {
     addCart (id, qty = 1) {
       const vm = this
       vm.filterLoadingItem = id
+      vm.isDisabled = id
       const postData = {
         'product_id': id,
         'qty': qty
@@ -105,6 +83,7 @@ export default {
         console.log('加入購物車(dital)', response.data)
         if (response.data.success) {
           vm.filterLoadingItem = ''
+          vm.isDisabled = ''
           vm.$bus.$emit('messsage:push', response.data.message, 'success')
           vm.$bus.$emit('cartsQty:update')
         }

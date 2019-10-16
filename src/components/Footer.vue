@@ -2,15 +2,17 @@
   <div>
     <footer class="container-fluid fixed-bottom" style="background-color: #f8f9fa">
       <div class="row">
-        <div class="col-3">
+        <div class="col-2">
           <button type="button" class="btn btn-cart" @click="openCartModal()">
             <i class="fas fa-shopping-cart text-dark fa-2x"></i>
             <span class="badge badge-pill badge-danger bage-num">{{ cartsQty }}</span>
           </button>
         </div>
-        <div class="footer-text col-9 text-right align-self-center">
-          <!-- <router-link to="/login">管理者模式</router-link> -->
-          <a href="#" @click.prevent="goLogin()">管理者模式</a>
+        <div class="footer-text col-10 text-right align-self-center">
+          <small>Copyright © 2019 by Lu</small>
+          <br />
+          <a href="#" @click.prevent="goLogin()"><small>管理者模式</small></a>
+          <small class="ml-1">/ 素材取自網路，無商業用途</small>
         </div>
       </div>
     </footer>
@@ -34,6 +36,7 @@
                     <button
                       type="button"
                       class="btn btn-sm p-0 text-danger"
+                      :disabled="isDisabled === item.id"
                       @click="removeCart(item.id)"
                     >
                       <i class="fas fa-spinner fa-spin" v-if="filterLoadingItem === item.id"></i>
@@ -56,7 +59,12 @@
                 </tr>
               </tfoot>
             </table>
-            <button type="button" class="btn btn-primary btn-block" v-if="carts.carts.length >0" @click="goOrders()">結帳去</button>
+            <button
+              type="button"
+              class="btn btn-primary btn-block"
+              v-if="carts.carts.length >0"
+              @click="goOrders()"
+            >結帳去</button>
             <button type="button" class="btn btn-light btn-block" data-dismiss="modal" v-else>關閉</button>
           </div>
         </div>
@@ -74,8 +82,8 @@ export default {
       carts: [],
       cartsQty: 0,
 
-      filterLoadingItem: ''
-
+      filterLoadingItem: '',
+      isDisabled: ''
     }
   },
 
@@ -97,6 +105,7 @@ export default {
     removeCart (id) {
       const vm = this
       vm.filterLoadingItem = id
+      vm.isDisabled = id
       const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart/${id}`
       vm.$http.delete(api).then((response) => {
         console.log('刪除購物車', response.data)
@@ -104,6 +113,7 @@ export default {
           vm.$bus.$emit('messsage:push', response.data.message, 'success')
           vm.getCarts()
           vm.filterLoadingItem = ''
+          vm.isDisabled = ''
         }
       })
     },

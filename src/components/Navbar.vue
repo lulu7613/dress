@@ -27,21 +27,21 @@
                   class="nav-link font-weight-bold"
                   to="/customer_products_topic"
                   style="border:0"
-                >主題商品</router-link>
+                >關於翠絲</router-link>
               </li>
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
                   to="/customer_products_hot"
                   style="border:0"
-                >人氣精選</router-link>
+                >最新消息</router-link>
               </li>
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
                   to="/customer_products_discount"
                   style="border:0"
-                >清倉55折</router-link>
+                >所有商品</router-link>
               </li>
             </ul>
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="row pl-4">
+  <div class="row">
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-5" v-for="item in propsData" :key="item.id">
-      <div class="card">
+      <div class="card product-template">
         <img :src="item.imageUrl" class="card-img-top pt-3 px-3" :alt="item.title" />
         <div class="card-body">
           <span
@@ -18,7 +18,7 @@
           >{{ item.category }}</span>
 
           <h6 class="card-title">
-            <a href="#" class="text-dark">{{item.title}}</a>
+            <a href="#" class="text-dark" @click="goToProductPage(item.id)">{{item.title}}</a>
           </h6>
           <div class="d-flex justify-content-between align-items-baseline">
             <div class="h6 font-weight-bold" v-if="!item.price">NT{{item.origin_price | currency}}</div>
@@ -33,7 +33,12 @@
         </div>
         <div class="card-footer d-flex bg-white">
           <button type="button" class="btn btn-light btn-sm" @click="goToProductPage(item.id)">查看更多</button>
-          <button type="button" class="btn btn-primary btn-sm ml-auto" @click="addCart(item.id)">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm ml-auto"
+            :disabled="isDisabled === item.id"
+            @click="addCart(item.id)"
+          >
             <i class="fas fa-spinner fa-spin" v-if="filterLoadingItem === item.id"></i>
             加入購物車
           </button>
@@ -49,7 +54,8 @@ export default {
 
   data () {
     return {
-      filterLoadingItem: ''
+      filterLoadingItem: '',
+      isDisabled: ''
     }
   },
 
@@ -64,6 +70,7 @@ export default {
     addCart (id, qty = 1) {
       const vm = this
       vm.filterLoadingItem = id
+      vm.isDisabled = id
       const postData = {
         'product_id': id,
         'qty': qty
@@ -73,6 +80,7 @@ export default {
         console.log('加入購物車(temp)', response.data)
         if (response.data.success) {
           vm.filterLoadingItem = ''
+          vm.isDisabled = ''
           vm.$bus.$emit('messsage:push', response.data.message, 'success')
           vm.$bus.$emit('cartsQty:update')
         }
@@ -81,3 +89,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.product-template:hover {
+  box-shadow: 1px 5px 5px rgba(102, 92, 92, 0.75);
+  margin: 0 -5px -5px 0;
+  transition: all .2s;
+}
+</style>

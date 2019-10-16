@@ -75,6 +75,7 @@
                     <button
                       type="button"
                       class="btn btn-outline-danger btn-sm"
+                      :disabled="isDisabled === item.id"
                       @click="removeCart(item.id)"
                     >
                       <i class="fas fa-spinner fa-spin" v-if="filterLoadingItem === item.id"></i>
@@ -195,7 +196,8 @@
             v-model="form.message"
           ></textarea>
         </div>
-        <div class="text-right pb-4">
+        <div class="text-right d-flex pb-4">
+          <button class="btn btn-primary mr-auto" @click="goHomePage">繼續購物</button>
           <button class="btn btn-danger">送出訂單</button>
         </div>
       </form>
@@ -213,7 +215,8 @@ export default {
         user: {}
       },
       isLoading: false,
-      filterLoadingItem: false
+      filterLoadingItem: '',
+      isDisabled: ''
     }
   },
 
@@ -226,8 +229,13 @@ export default {
       vm.$http.get(api).then((response) => {
         console.log('結帳-輸入訂單資料', response.data)
         if (response.data.success) {
-          vm.orders = response.data.data
-          vm.isLoading = false
+          if (response.data.data.carts.length === 0) {
+            vm.$router.push('/')
+            vm.isLoading = false
+          } else {
+            vm.orders = response.data.data
+            vm.isLoading = false
+          }
         }
       })
     },
@@ -236,6 +244,7 @@ export default {
     removeCart (id) {
       const vm = this
       vm.filterLoadingItem = id
+      vm.isDisabled = id
       const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart/${id}`
       vm.$http.delete(api).then((response) => {
         console.log('刪除購物車', response.data)
@@ -244,6 +253,7 @@ export default {
           vm.getOrders()
           this.$bus.$emit('cartsQty:update')
           vm.filterLoadingItem = ''
+          vm.isDisabled = ''
         }
       })
     },
@@ -284,6 +294,12 @@ export default {
           })
         }
       })
+    },
+
+    // 回首頁
+    goHomePage () {
+      this.$router.push('/')
+      window.scroll(0, 0)
     }
 
   },

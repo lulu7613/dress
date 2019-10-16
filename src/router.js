@@ -20,21 +20,6 @@ export default new Router({
           component: () => import('./views/CustomerProducts.vue')
         },
         {
-          path: 'customer_products_topic', // 主題商品
-          name: 'CustomerProductsTopic',
-          component: () => import('./views/CustomerProductsTopic.vue')
-        },
-        {
-          path: 'customer_products_hot', // 人氣精選
-          name: 'CustomerProductsHot',
-          component: () => import('./views/CustomerProductsHot.vue')
-        },
-        {
-          path: 'customer_products_discount', // 清倉55折
-          name: 'CustomerProductsDiscount',
-          component: () => import('./views/CustomerProductsDiscount.vue')
-        },
-        {
           path: 'customer_products_search/:keyword', // 搜尋
           name: 'CustomerProductsSearch',
           component: () => import('./views/CustomerProductsSearch.vue')

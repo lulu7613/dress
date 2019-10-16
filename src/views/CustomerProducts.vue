@@ -1,15 +1,55 @@
 <template>
   <div>
-    <Banner class="mb-4" />
-    <div class="container-fluid">
-      <loading :active.sync="isLoading"></loading>
-      <div class="row mb-5">
-        <div class="col-lg-3 mt-md-5">
-          <CouponAd />
-        </div>
-        <div class="col-lg-9">
-          <Breadcrumb class="mb-4" :propsData="Breadcrumb" />
-          <ProductTemplate :propsData="propsData" />
+    <loading :active.sync="isLoading"></loading>
+    <Banner class="mb-5" />
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-11">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-2 mb-4">
+              <div class="nav flex-column nav-pills">
+                <a
+                  class="nav-link mb-2 active product-type"
+                  data-toggle="pill"
+                  href="#"
+                  @click.prevent="getfilterProducts('all')"
+                >
+                  <i class="fas fa-angle-right" v-if="type === 'all'"></i>
+                  全部商品
+                </a>
+                <a
+                  class="nav-link mb-2 product-type"
+                  data-toggle="pill"
+                  href="#"
+                  @click.prevent="getfilterProducts('topic')"
+                >
+                  <i class="fas fa-angle-right" v-if="type === 'topic'"></i>
+                  主題商品
+                </a>
+                <a
+                  class="nav-link mb-2 product-type"
+                  data-toggle="pill"
+                  href="#"
+                  @click.prevent="getfilterProducts('hot')"
+                >
+                  <i class="fas fa-angle-right" v-if="type === 'hot'"></i>
+                  人氣精選
+                </a>
+                <a
+                  class="nav-link product-type"
+                  data-toggle="pill"
+                  href="#"
+                  @click.prevent="getfilterProducts('discount')"
+                >
+                  <i class="fas fa-angle-right" v-if="type === 'discount'"></i>
+                  清倉55折
+                </a>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <ProductTemplate :propsData="filterProducts" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -18,16 +58,12 @@
 
 <script>
 import Banner from '../components/Banner.vue'
-import Breadcrumb from '../components/Breadcrumb.vue'
 import ProductTemplate from '../components/ProductTemplate.vue'
-import CouponAd from '../components/CouponAd.vue'
 
 export default {
   components: {
     Banner,
-    Breadcrumb,
-    ProductTemplate,
-    CouponAd
+    ProductTemplate
   },
 
   data () {
@@ -35,14 +71,16 @@ export default {
       Breadcrumb: {
         category: '全部商品'
       },
-      propsData: [],
+      products: [],
+      type: 'all',
+      filterProducts: [],
       isLoading: false
 
     }
   },
 
   methods: {
-    // 取得分類為 '全部商品' 的商品列表
+    // 取得全部商品列表
     getProdects () {
       const vm = this
       vm.isLoading = true
@@ -50,10 +88,46 @@ export default {
       vm.$http.get(api).then((response) => {
         console.log('全部商品', response.data)
         if (response.data.success) {
-          vm.propsData = response.data.products
+          vm.type = 'all'
+          vm.products = response.data.products
+          vm.filterProducts = response.data.products
           vm.isLoading = false
         }
       })
+    },
+
+    // 篩選商品列表
+    getfilterProducts (type) {
+      const vm = this
+      if (type === 'all') {
+        vm.type = 'all'
+        vm.filterProducts = []
+        vm.filterProducts = vm.products
+      } else if (type === 'topic') {
+        vm.type = 'topic'
+        vm.filterProducts = []
+        vm.products.forEach((item) => {
+          if (item.category === '主題商品') {
+            vm.filterProducts.push(item)
+          }
+        })
+      } else if (type === 'hot') {
+        vm.type = 'hot'
+        vm.filterProducts = []
+        vm.products.forEach((item) => {
+          if (item.category === '人氣精選') {
+            vm.filterProducts.push(item)
+          }
+        })
+      } else if (type === 'discount') {
+        vm.type = 'discount'
+        vm.filterProducts = []
+        vm.products.forEach((item) => {
+          if (item.category === '清倉55折') {
+            vm.filterProducts.push(item)
+          }
+        })
+      }
     }
   },
 
@@ -62,3 +136,14 @@ export default {
   }
 }
 </script>
+
+<style>
+.product-type {
+  border: 1px dashed #0493aa;
+}
+
+.product-type:hover {
+  color: #e26600;
+  background-color: #fce6a9;
+}
+</style>

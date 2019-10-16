@@ -92,8 +92,11 @@
             </tr>
           </tbody>
         </table>
-        <div class="text-right" v-if="order.is_paid === false">
+        <div class="text-right" v-if="!order.is_paid">
           <button class="btn btn-danger">確認付款去</button>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-primary btn-lg" v-if="order.is_paid" @click="goHomePage()">繼續購物去</button>
         </div>
       </form>
     </div>
@@ -122,6 +125,12 @@ export default {
         vm.order.is_paid = true
         vm.isLoading = false
       })
+    },
+
+    // 回首頁
+    goHomePage () {
+      this.$router.push('/')
+      window.scroll(0, 0)
     }
 
   },
