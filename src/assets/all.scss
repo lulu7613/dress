@@ -1,0 +1,12 @@
+@import "~bootstrap/scss/functions";
+@import "./helpers/_variables";
+@import "~bootstrap/scss/bootstrap" ;
+
+.bg-cover {
+  background-size: cover;
+}
+
+/* 自訂 router-link 的 active 樣式 */
+.router-link-exact-active {
+  border: 1px solid #fff;
+}
