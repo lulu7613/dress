@@ -1,22 +1,26 @@
 <template>
   <div>
     <Alert />
-    <Navbar/>
+    <Navbar />
     <router-view></router-view>
+    <Cart />
     <Footer />
   </div>
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
-import Footer from '../components/Footer.vue'
 import Alert from '../components/AlterMessage.vue'
+import Navbar from '../components/Navbar.vue'
+import Cart from '../components/Cart.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
   components: {
+    Alert,
     Navbar,
-    Footer,
-    Alert
+    Cart,
+    Footer
+
   }
 }
 </script>

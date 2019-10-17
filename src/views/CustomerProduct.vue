@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <!-- 麵包屑分頁 -->
-    <Breadcrumb :propsData="tempProduct"/>
+    <Breadcrumb class="container mt-3" :propsData="tempProduct"/>
     <main class="container my-5 main">
       <!-- product 主要商品展示 -->
       <ProductDetailTemplate :propsData="tempProduct" />

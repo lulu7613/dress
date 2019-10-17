@@ -41,21 +41,9 @@
                   class="nav-link font-weight-bold"
                   to="/customer_products_discount"
                   style="border:0"
-                >所有商品</router-link>
+                >商城購物</router-link>
               </li>
             </ul>
-
-            <form class="form-inline my-2 my-lg-0" name="search">
-              <input
-                class="form-control mr-sm-2"
-                type="text"
-                placeholder="輸入產品關鍵字"
-                aria-label="Search"
-                v-model.trim="keyword"
-                @keyup.enter="search()"
-              />
-              <button type="button" class="btn btn-success my-2 my-sm-0" @click="search()">搜尋</button>
-            </form>
           </div>
         </slot>
       </nav>
@@ -68,15 +56,6 @@ export default {
   data () {
     return {
       keyword: ''
-    }
-  },
-
-  methods: {
-    search () {
-      const vm = this
-      vm.$bus.$emit('search:array', vm.keyword)
-      vm.$router.push(`/customer_products_search/${vm.keyword}`)
-      vm.keyword = ''
     }
   }
 }

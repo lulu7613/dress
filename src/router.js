@@ -15,14 +15,9 @@ export default new Router({
       component: () => import('./views/Dashboard.vue'),
       children: [
         {
-          path: '/', // 全部商品 (index)
+          path: '/customer_products', // 全部商品 (index)
           name: 'CustomerProducts',
           component: () => import('./views/CustomerProducts.vue')
-        },
-        {
-          path: 'customer_products_search/:keyword', // 搜尋
-          name: 'CustomerProductsSearch',
-          component: () => import('./views/CustomerProductsSearch.vue')
         },
         {
           path: 'customer_product/:id', // 單一商品細節
