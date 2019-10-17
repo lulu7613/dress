@@ -2,8 +2,8 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <Banner class="mb-5" />
-    <div class="row justify-content-center mb-5">
-      <div class="col-md-11">
+    <div class="mb-5">
+      <div class="col-md-11 mx-auto">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-2 mb-4">

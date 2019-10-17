@@ -265,9 +265,13 @@ export default {
       const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/admin/products?page=${page}`
       vm.$http.get(api).then((response) => {
         console.log('getProducts()', response.data)
-        vm.products = response.data.products
-        vm.pagination = response.data.pagination
-        vm.isLoading = false
+        if (response.data.success) {
+          vm.products = response.data.products
+          vm.pagination = response.data.pagination
+          vm.isLoading = false
+        } else {
+          vm.$router.push('/login')
+        }
       })
     },
 

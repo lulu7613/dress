@@ -23,9 +23,29 @@ Vue.filter('currency', currency) // 啟用 filters.js
 Vue.filter('date', date)
 
 Vue.config.productionTip = false
+axios.defaults.withCredentials = true
 
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+// 導航守衛 (切換頁面時觸發: 判斷是否需要驗證，才能跳轉頁面，常用在檢查用戶是否仍在登入狀態)
+router.beforeEach((to, from, next) => {
+  console.log('to', to, 'from', from, 'next', next)
+  if (to.meta.requiresAuth) {
+    // 檢查用戶是否仍持續登入 /api/user/check
+    const api = `${process.env.VUE_APP_PATH}/api/user/check`
+    axios.post(api).then((response) => {
+      console.log('檢查登入狀態', response.data)
+      if (response.data.success) {
+        next()
+      } else {
+        next('/login') // 留在 login 頁面
+      }
+    })
+  } else {
+    next()
+  }
+})
