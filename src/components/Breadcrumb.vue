@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb bg-transparent h5">
         <li class="breadcrumb-item">
-          <router-link to="/customer_products">商城購物</router-link>
+          <router-link to="/customer_products">購物商城</router-link>
           </li>
         <li class="breadcrumb-item" v-if="propsData.title">
           <span class="text-primary">{{ propsData.category }}</span>

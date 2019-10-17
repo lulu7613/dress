@@ -41,7 +41,7 @@
                   class="nav-link font-weight-bold"
                   to="/customer_products_discount"
                   style="border:0"
-                >商城購物</router-link>
+                >購物商城</router-link>
               </li>
             </ul>
           </div>

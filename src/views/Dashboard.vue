@@ -3,7 +3,7 @@
     <Alert />
     <Navbar />
     <router-view></router-view>
-    <Cart />
+    <Cart v-if="$route.name === 'CustomerProducts' || $route.name === 'CustomerProduct'" />
     <Footer />
   </div>
 </template>
@@ -20,7 +20,6 @@ export default {
     Navbar,
     Cart,
     Footer
-
   }
 }
 </script>

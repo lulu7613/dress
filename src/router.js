@@ -7,7 +7,12 @@ export default new Router({
   routes: [
     {
       path: '*',
-      redirect: '/'
+      redirect: '/home'
+    },
+    { // 首頁
+      path: '/home',
+      name: 'Home',
+      component: () => import('./views/Home.vue')
     },
     { // 客戶端頁面
       path: '/',
@@ -15,7 +20,7 @@ export default new Router({
       component: () => import('./views/Dashboard.vue'),
       children: [
         {
-          path: '/customer_products', // 全部商品 (index)
+          path: '/customer_products', // 全部商品
           name: 'CustomerProducts',
           component: () => import('./views/CustomerProducts.vue')
         },
@@ -25,14 +30,19 @@ export default new Router({
           component: () => import('./views/CustomerProduct.vue')
         },
         {
-          path: 'customer_orders', // 結帳頁面 - 輸入訂購資料
-          name: 'CustomerOrders',
-          component: () => import('./views/CustomerOrders.vue')
-        },
-        {
-          path: 'customer_check/:id', // 結帳頁面 - 金流付款 & 付款完成
+          path: 'customer_check', // 結帳頁面 - 確認購物清單
           name: 'CustomerCheck',
           component: () => import('./views/CustomerCheck.vue')
+        },
+        {
+          path: 'customer_order', // 結帳頁面 - 輸入訂購資料
+          name: 'CustomerOrder',
+          component: () => import('./views/CustomerOrder.vue')
+        },
+        {
+          path: 'customer_finish/:orderId', // 結帳頁面 - 金流付款 & 付款完成
+          name: 'CustomerFinish',
+          component: () => import('./views/CustomerFinish.vue')
         }
       ]
     },

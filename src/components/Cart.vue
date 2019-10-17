@@ -13,7 +13,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header alert-primary" style="border-bottom:0">
-              <h5 class="modal-title" id="exampleModalCenterTitle">已購買物品</h5>
+              <h5 class="modal-title" id="exampleModalCenterTitle">購物車清單</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -54,7 +54,7 @@
                 type="button"
                 class="btn btn-primary btn-block"
                 v-if="carts.carts.length >0"
-                @click="goOrders()"
+                @click="goCheck()"
               >結帳去</button>
               <button type="button" class="btn btn-light btn-block" data-dismiss="modal" v-else>繼續購物</button>
             </div>
@@ -133,9 +133,9 @@ export default {
       this.getCarts()
     },
 
-    // 進入結帳頁面
-    goOrders () {
-      this.$router.push('/customer_orders')
+    // 進入結帳頁面 - 確認購物清單
+    goCheck () {
+      this.$router.push('/customer_check')
       $('#cartModal').modal('hide')
     }
 
