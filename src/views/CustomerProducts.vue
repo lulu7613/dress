@@ -49,14 +49,14 @@
                 <input
                   type="text"
                   class="form-control"
-                  style="border: 1px solid #0493aa"
+                  style="border: 1px solid #eb6241"
                   placeholder="輸入關鍵字"
                   v-model="keyword"
                   @keyup.enter="getfilterProducts('search')"
                 />
                 <div class="input-group-append">
                   <button
-                    class="btn btn-outline-primary"
+                    class="btn btn-info"
                     type="button"
                     @click="getfilterProducts('search')"
                   >
@@ -181,7 +181,7 @@ export default {
 }
 
 .product-type:hover {
-  color: #e26600;
+  color: #eb6241;
   background-color: #fce6a9;
 }
 </style>

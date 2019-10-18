@@ -19,6 +19,16 @@ export default new Router({
       name: 'Dashboard',
       component: () => import('./views/Dashboard.vue'),
       children: [
+        { // 關於翠絲
+          path: '/about',
+          name: 'About',
+          component: () => import('./views/About.vue')
+        },
+        { // 最新消息
+          path: '/news',
+          name: 'News',
+          component: () => import('./views/News.vue')
+        },
         {
           path: '/customer_products', // 全部商品
           name: 'CustomerProducts',

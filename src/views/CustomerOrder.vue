@@ -62,7 +62,7 @@
                   </td>
                   <td class="align-middle">
                     {{ item.product.title }}
-                    <div class="text-warning" v-if="item.coupon">
+                    <div class="text-info" v-if="item.coupon">
                       <small>已套用優惠券</small>
                     </div>
                   </td>
@@ -96,7 +96,7 @@
 
       <!-- 訂購人資訊 -->
       <form class="col-md-7" @submit.prevent="addCartOrder()">
-        <h4 class="text-center alert-danger py-3">
+        <h4 class="text-center alert-info py-3">
           <strong>填寫訂購人資料</strong>
         </h4>
         <div class="form-group">

@@ -57,7 +57,7 @@
             </td>
             <td class="align-middle">
               <router-link :to="`/customer_product/${item.product.id}`">{{ item.product.title }}</router-link>
-              <div class="text-warning" v-if="item.coupon">
+              <div class="text-info" v-if="item.coupon">
                 <small>已套用優惠券</small>
               </div>
             </td>

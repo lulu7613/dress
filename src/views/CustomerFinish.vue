@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="mt-3 text-danger" style="font-size: 1.2rem" v-if="order.is_paid">
+    <div class="mt-3 text-info" style="font-size: 1.2rem" v-if="order.is_paid">
       <strong>{{ order.user.name }}</strong> 小姐/先生：
       <br />感謝您對
       <strong>翠絲服飾</strong> 的支持，以下是您的結帳明細，請妥善保管哦。
@@ -140,7 +140,7 @@ export default {
 
     // 回首頁
     goHomePage () {
-      this.$router.push('/')
+      this.$router.push('/customer_products')
       window.scroll(0, 0)
     }
 

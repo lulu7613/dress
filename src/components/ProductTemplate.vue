@@ -91,6 +91,10 @@ export default {
 </script>
 
 <style>
+.product-template {
+  transition: all .2s;
+}
+
 .product-template:hover {
   box-shadow: 1px 5px 5px rgba(102, 92, 92, 0.75);
   margin: 0 -5px -5px 0;
