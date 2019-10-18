@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
           <div class="col-sm-5 col-md-6 mb-5 text-center text-md-right">
             <router-link to="/customer_products">
-              <img class="logo img-fluid" src="../assets/img/logo01.png" alt="logo01.png" />
+              <img class="logo img-fluid" src="../assets/img/logo03.png" alt="logo.png" />
             </router-link>
           </div>
           <ul class="nav flex-column col-sm-7 col-md-6 text-center text-md-left align-self-center">
@@ -42,7 +42,7 @@
 }
 
 .logo:hover {
-  max-width: 84%;
+  transform: translateX(-20px);
   transition: all 0.35s;
 }
 

@@ -6,10 +6,10 @@
       </div>
       <p class="h1 font-weight-bolder my-5">"我的 T-Shirt，就是和你不一樣！"</p>
       <div>
-        <h4 class="text-primary font-weight-bolder">
+        <h1 class="h4 text-primary font-weight-bolder">
           <i class="fas fa-pencil-alt"></i>
           關於翠絲
-        </h4>
+        </h1>
         <blockquote class="blockquote pb-2">
           <p>
             翠絲服飾成立於 2019 年 1 月，是一間專門賣 T-Shirt 的店面。
@@ -53,8 +53,14 @@
           心動不如行動，進來翠絲逛逛吧！
         </h4>
           <div class="mt-3 mb-5 text-center text-sm-left">
-            <router-link class="btn btn-lg btn-primary" to="/news">最新消息</router-link>
-            <router-link class="btn btn-lg btn-info ml-5" to="/customer_products">購物商城</router-link>
+            <router-link class="btn btn-lg btn-primary" to="/news">
+              <i class="fas fa-rss"></i>
+              最新消息
+            </router-link>
+            <router-link class="btn btn-lg btn-info ml-5" to="/customer_products">
+              <i class="fas fa-shopping-cart"></i>
+              購物商城
+            </router-link>
           </div>
       </div>
     </div>

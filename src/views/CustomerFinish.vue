@@ -92,7 +92,7 @@
       </div>
     </form>
     <div class="text-center">
-      <button class="btn btn-danger btn-lg" v-if="order.is_paid" @click="goHomePage()">
+      <button class="btn btn-info btn-lg" v-if="order.is_paid" @click="goHomePage()">
         <i class="fas fa-angle-right"></i>
         回購物商城
         <i class="fas fa-angle-left"></i>

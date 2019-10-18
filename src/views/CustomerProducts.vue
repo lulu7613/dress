@@ -10,7 +10,7 @@
           <div class="col-md-2 mb-4">
             <div class="nav flex-column nav-pills sticky-top">
               <a
-                class="nav-link mb-2 active product-type"
+                class="nav-link mb-2 active products-type"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('all')"
@@ -19,7 +19,7 @@
                 全部商品
               </a>
               <a
-                class="nav-link mb-2 product-type"
+                class="nav-link mb-2 products-type"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('topic')"
@@ -28,7 +28,7 @@
                 主題商品
               </a>
               <a
-                class="nav-link mb-2 product-type"
+                class="nav-link mb-2 products-type"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('hot')"
@@ -37,7 +37,7 @@
                 人氣精選
               </a>
               <a
-                class="nav-link product-type"
+                class="nav-link mb-2 products-type"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('discount')"
@@ -45,18 +45,23 @@
                 <i class="fas fa-angle-right" v-if="type === 'discount'"></i>
                 清倉55折
               </a>
+              <router-link class="nav-link products-my-order" to="">
+                <i class="fas fa-heart"></i>
+                我的訂單
+              </router-link>
+
               <div class="input-group mt-3">
                 <input
                   type="text"
                   class="form-control"
-                  style="border: 1px solid #eb6241"
+                  style="border: 1px solid #4b9983"
                   placeholder="輸入關鍵字"
                   v-model="keyword"
                   @keyup.enter="getfilterProducts('search')"
                 />
                 <div class="input-group-append">
                   <button
-                    class="btn btn-info"
+                    class="btn btn-primary"
                     type="button"
                     @click="getfilterProducts('search')"
                   >
@@ -70,7 +75,10 @@
           <div class="col-md-10">
             <Breadcrumb class="pl-0" :propsData="Breadcrumb" />
             <ProductTemplate :propsData="filterProducts" />
-            <p class="text-danger text-center" v-if="type === 'search' && filterProducts.length === 0">哎呀！我們搜尋不到您輸入的關鍵字。</p>
+            <p
+              class="text-danger text-center"
+              v-if="type === 'search' && filterProducts.length === 0"
+            >哎呀！我們搜尋不到您輸入的關鍵字。</p>
           </div>
         </div>
       </div>
@@ -176,12 +184,28 @@ export default {
 </script>
 
 <style>
-.product-type {
-  border: 1px dashed #0493aa;
+.products-type {
+  border: 1px dashed #4b9983;
 }
 
-.product-type:hover {
+.products-type:hover {
   color: #eb6241;
   background-color: #fce6a9;
+}
+
+.products-my-order {
+  border: 1px dashed #eb6241;
+  background-color: #eb6241;
+  color: #fff;
+  /* border: 1px dashed #eb6241;
+  background-color: #fff;
+  color: #eb6241; */
+
+}
+
+.products-my-order:hover {
+  color: #fff;
+  background-color: #e93406
+
 }
 </style>

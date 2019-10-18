@@ -172,7 +172,7 @@
         </div>
         <div class="text-right d-flex mt-5">
           <button class="btn btn-lg btn-secondary mr-auto" @click="goHomePage()">取消訂單：回首頁</button>
-          <button class="btn btn-lg btn-danger">下一步：送出訂單</button>
+          <button class="btn btn-lg btn-info">下一步：送出訂單</button>
         </div>
       </form>
     </div>

@@ -88,12 +88,12 @@
 
       <div class="text-right d-flex mt-5">
         <button class="btn btn-lg btn-secondary mr-auto" @click="goHomePage()">上一步：繼續購物</button>
-        <button class="btn btn-lg btn-danger" @click="goOrder()">下一步：填寫資料</button>
+        <button class="btn btn-lg btn-info" @click="goOrder()">下一步：填寫資料</button>
       </div>
     </div>
     <div class="text-center" v-else>
       <p class="h5 mb-4">哎呀！購物車被清光了！要回去購物嗎？</p>
-      <button class="btn btn-lg btn-danger" @click="goHomePage()">
+      <button class="btn btn-lg btn-info" @click="goHomePage()">
         <i class="fas fa-angle-right"></i>
         回購物商城
         <i class="fas fa-angle-left"></i>
