@@ -37,7 +37,7 @@
                 人氣精選
               </a>
               <a
-                class="nav-link mb-2 products-type"
+                class="nav-link products-type"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('discount')"
@@ -45,12 +45,8 @@
                 <i class="fas fa-angle-right" v-if="type === 'discount'"></i>
                 清倉55折
               </a>
-              <router-link class="nav-link products-my-order" to="/store/my_order" v-if="myOrder">
-                <i class="fas fa-heart"></i>
-                我的訂單
-              </router-link>
 
-              <div class="input-group mt-3">
+              <div class="input-group mt-2 mb-3">
                 <input
                   type="text"
                   class="form-control"
@@ -69,12 +65,33 @@
                   </button>
                 </div>
               </div>
+              <a
+                class="nav-link mb-2 my-products"
+                href="#"
+                v-if="myFavorite.length > 0"
+                @click.prevent="getfilterProducts('favorite')"
+              >
+                <i class="fas fa-heart"></i>
+                我的最愛
+              </a>
+              <router-link
+                class="nav-link my-products"
+                to="/store/my_order"
+                v-if="myOrder.length > 0"
+              >
+                <i class="fas fa-columns"></i>
+                我的訂單
+              </router-link>
             </div>
           </div>
           <!-- 內容 -->
           <div class="col-md-10">
             <Breadcrumb class="pl-0" :propsData="Breadcrumb" />
-            <ProductTemplate :propsData="filterProducts" />
+            <ProductTemplate
+              :propsData="filterProducts"
+              :propsFavorite="myFavorite"
+              @emitFavoriteId="getFavorite"
+            />
             <p
               class="text-danger text-center"
               v-if="type === 'search' && filterProducts.length === 0"
@@ -104,9 +121,10 @@ export default {
         category: '全部商品'
       },
       products: [],
-      type: 'all',
+      type: '',
       filterProducts: [],
-      myOrder: [],
+      myOrder: JSON.parse(localStorage.getItem('dressMyOrder')) || [],
+      myFavorite: JSON.parse(localStorage.getItem('dressMyFavorite')) || [],
       keyword: '',
       isLoading: false
 
@@ -124,7 +142,6 @@ export default {
         if (response.data.success) {
           vm.products = response.data.products
           vm.filterProducts = response.data.products
-          vm.myOrder = JSON.parse(localStorage.getItem('dressMyOrder'))
           vm.isLoading = false
         }
       })
@@ -175,7 +192,17 @@ export default {
           }
         })
         vm.keyword = ''
+      } else if (type === 'favorite') {
+        vm.type = 'favorite'
+        vm.Breadcrumb.category = `我的最愛`
+        vm.filterProducts = vm.myFavorite
       }
+    },
+
+    // localStorage 獲取 favorite 變化
+    getFavorite () {
+      const vm = this
+      vm.myFavorite = JSON.parse(localStorage.getItem('dressMyFavorite')) || []
     }
   },
 
@@ -195,7 +222,7 @@ export default {
   background-color: #fce6a9;
 }
 
-.products-my-order {
+.my-products {
   border: 1px dashed #eb6241;
   background-color: #eb6241;
   color: #fff;
@@ -204,9 +231,8 @@ export default {
   color: #eb6241; */
 }
 
-.products-my-order:hover {
+.my-products:hover {
   color: #fff;
-  background-color: #e93406
-
+  background-color: #e93406;
 }
 </style>

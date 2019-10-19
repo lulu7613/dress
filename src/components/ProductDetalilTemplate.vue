@@ -5,7 +5,25 @@
     </div>
     <div class="col-lg-5 mb-5" id="product-content-main">
       <div class="d-flex align-items-baseline">
-        <h1 class="h3 font-weight-bolder mr-auto">{{ propsData.title }}</h1>
+        <h1 class="h3 font-weight-bolder mr-3">{{ propsData.title }}</h1>
+        <span
+          class="text-primary"
+          style="font-size: 1.1rem; cursor: pointer;"
+          v-if="!isFavorite"
+          @click.prevent="addFavorite(true)"
+        >
+          <i class="far fa-heart"></i>
+          加入最愛
+        </span>
+        <span
+          class="text-danger"
+          style="font-size: 1.1rem; cursor: pointer;"
+          v-if="isFavorite"
+          @click.prevent="addFavorite(false)"
+        >
+          <i class="fas fa-heart"></i>
+          已加入最愛
+        </span>
       </div>
       <span
         class="badge badge-secondary mb-2"
@@ -22,14 +40,14 @@
       <p>{{propsData.content}}</p>
       <div class="d-flex justify-content-end align-items-end">
         <del>
-          <div class="h5" v-if="propsData.price">原價 NT${{propsData.origin_price}}</div>
+          <div class="h5" v-if="propsData.price">原價 NT$ {{propsData.origin_price}}</div>
         </del>
         <div class="h3 ml-auto text-danger" v-if="propsData.price">
-          <small class="font-weight-bold">特價 NT$</small>
+          <small class="font-weight-bold">特價 NT$ </small>
           <strong>{{ propsData.price }}</strong>
         </div>
         <div class="h3 ml-auto text-danger" v-if="!propsData.price">
-          <small class="font-weight-bold">售價 $NT</small>
+          <small class="font-weight-bold">售價 $NT </small>
           <strong>{{propsData.origin_price}}</strong>
         </div>
       </div>
@@ -64,6 +82,8 @@ export default {
 
   data () {
     return {
+      isFavorite: '',
+      favoriteData: [],
       filterLoadingItem: '',
       isDisabled: ''
     }

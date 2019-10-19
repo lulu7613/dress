@@ -2,6 +2,24 @@
   <div class="row">
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-5" v-for="item in propsData" :key="item.id">
       <div class="card product-template">
+        <span
+          title="移除最愛"
+          class="text-info favorite-icon"
+          style="font-size: 1.1rem; cursor: pointer;"
+          v-if="myFavorite.find(obj => obj.id === item.id)"
+          @click.prevent="removeFavorite(item)"
+        >
+          <i class="fas fa-heart"></i>
+        </span>
+        <span
+          title="加入最愛"
+          class="text-primary favorite-icon"
+          style="font-size: 1.1rem; cursor: pointer;"
+          v-else
+          @click.prevent="addFavorite(item)"
+        >
+          <i class="far fa-heart"></i>
+        </span>
         <img :src="item.imageUrl" class="card-img-top pt-3 px-3" :alt="item.title" />
         <div class="card-body">
           <span
@@ -50,12 +68,15 @@
 
 <script>
 export default {
-  props: ['propsData'],
+  props: ['propsData', 'propsFavorite'],
 
   data () {
     return {
       filterLoadingItem: '',
-      isDisabled: ''
+      isDisabled: '',
+
+      myFavorite: [...this.propsFavorite],
+      isFavorite: ''
     }
   },
 
@@ -63,6 +84,7 @@ export default {
     // 點擊查看更多到商品細項元件 CustomerProduct/:id
     goToProductPage (id) {
       this.$router.push(`/store/customer_product/${id}`)
+      this.myFavorite = [...this.propsFavorite]
       this.$emit('emit', id)
     },
 
@@ -85,6 +107,28 @@ export default {
           vm.$bus.$emit('cartsQty:update')
         }
       })
+    },
+
+    // localStorage 加入我的最愛
+    addFavorite (item) {
+      const vm = this
+      vm.myFavorite.push(item)
+      localStorage.setItem('dressMyFavorite', JSON.stringify(vm.myFavorite))
+      vm.$emit('emitFavoriteId')
+      vm.$bus.$emit('messsage:push', '商品加入我的最愛囉～', 'success')
+    },
+
+    // 移除最愛
+    removeFavorite (item) {
+      const vm = this
+      vm.myFavorite.filter((obj, index) => {
+        if (obj.id === item.id) {
+          return vm.myFavorite.splice(index, 1)
+        }
+      })
+      localStorage.setItem('dressMyFavorite', JSON.stringify(vm.myFavorite))
+      vm.$emit('emitFavoriteId')
+      vm.$bus.$emit('messsage:push', '商品從我的最愛移除！', 'danger')
     }
   }
 }
@@ -92,12 +136,18 @@ export default {
 
 <style>
 .product-template {
-  transition: all .2s;
+  transition: all 0.2s;
+  position: relative;
 }
 
 .product-template:hover {
   box-shadow: 1px 5px 5px rgba(102, 92, 92, 0.75);
   margin: 0 -5px -5px 0;
-  transition: all .2s;
+  transition: all 0.2s;
+}
+
+.favorite-icon {
+  position: absolute;
+  left: 5px;
 }
 </style>
