@@ -27,21 +27,27 @@
                   class="nav-link font-weight-bold"
                   to="/store/about"
                   style="border:0"
-                >關於翠絲</router-link>
+                >
+                <i class="fas fa-map-marker-alt" v-if="$route.name === 'About'"></i>
+                關於翠絲</router-link>
               </li>
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
                   to="/store/news"
                   style="border:0"
-                >最新消息</router-link>
+                >
+                <i class="fas fa-map-marker-alt" v-if="$route.name === 'News'"></i>
+                最新消息</router-link>
               </li>
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
                   to="/store/customer_products"
                   style="border:0"
-                >購物商城</router-link>
+                >
+                <i class="fas fa-map-marker-alt" v-if="$route.name === 'CustomerProducts'"></i>
+                購物商城</router-link>
               </li>
             </ul>
           </div>
