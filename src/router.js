@@ -53,7 +53,13 @@ export default new Router({
           path: 'customer_finish/:orderId', // 結帳頁面 - 金流付款 & 付款完成
           name: 'CustomerFinish',
           component: () => import('./views/CustomerFinish.vue')
+        },
+        {
+          path: 'my_order', // 我的訂單
+          name: 'CustomerMyOrder',
+          component: () => import('./views/CustomerMyOrder.vue')
         }
+
       ]
     },
     {

@@ -45,7 +45,7 @@
                 <i class="fas fa-angle-right" v-if="type === 'discount'"></i>
                 清倉55折
               </a>
-              <router-link class="nav-link products-my-order" to="">
+              <router-link class="nav-link products-my-order" to="/my_order" v-if="myOrder">
                 <i class="fas fa-heart"></i>
                 我的訂單
               </router-link>
@@ -106,6 +106,7 @@ export default {
       products: [],
       type: 'all',
       filterProducts: [],
+      myOrder: [],
       keyword: '',
       isLoading: false
 
@@ -123,6 +124,7 @@ export default {
         if (response.data.success) {
           vm.products = response.data.products
           vm.filterProducts = response.data.products
+          vm.myOrder = JSON.parse(localStorage.getItem('dressMyOrder'))
           vm.isLoading = false
         }
       })
@@ -200,7 +202,6 @@ export default {
   /* border: 1px dashed #eb6241;
   background-color: #fff;
   color: #eb6241; */
-
 }
 
 .products-my-order:hover {

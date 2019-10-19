@@ -6,7 +6,7 @@
       </div>
       <p class="h1 font-weight-bolder my-5">"我的 T-Shirt，就是和你不一樣！"</p>
       <div>
-        <h1 class="h4 text-primary font-weight-bolder">
+        <h1 class="h5 text-primary font-weight-bolder">
           <i class="fas fa-pencil-alt"></i>
           關於翠絲
         </h1>
@@ -52,7 +52,7 @@
         <h4 class="text-primary font-weight-bolder text-center text-sm-left">
           心動不如行動，進來翠絲逛逛吧！
         </h4>
-          <div class="mt-3 mb-5 text-center text-sm-left">
+          <div class="my-4 text-center text-sm-left">
             <router-link class="btn btn-lg btn-primary" to="/news">
               <i class="fas fa-rss"></i>
               最新消息

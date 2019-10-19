@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <div>
     <loading :active.sync="isLoading"></loading>
     <div class="row my-3">
       <div class="col-md-6">
-        <Page :propsPage="pagination" @emitPage="getProducts"/>
+        <Page :propsPage="pagination" @emitPage="getProducts" />
       </div>
       <div class="col-md-6 text-right">
         <!-- 製作 model 效果 -->
@@ -12,45 +12,46 @@
     </div>
 
     <!-- 商品列表 -->
-    <table class="table table-hover">
-      <thead>
-        <th width="55">編號</th>
-        <th width="100">分類</th>
-        <th>產品名稱</th>
-        <th width="120" class="text-right">原價</th>
-        <th width="120" class="text-right">售價</th>
-        <th width="120" class="text-center">啟用狀態</th>
-        <th width="120" class="text-center">編輯</th>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in products" :key="item.id">
-          <td>{{ index +1 }}</td>
-          <td>{{ item.category }}</td>
-          <td>{{ item.title }}</td>
-          <td class="text-right">{{ item.origin_price | currency }}</td>
-          <td class="text-right">{{ item.price | currency }}</td>
-          <td class="text-center">
-            <span v-if="item.is_enabled" class="text-success">啟用</span>
-            <span v-else class="text-secondary">未啟用</span>
-          </td>
-          <td class="text-center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button
-                type="button"
-                class="btn btn-outline-primary btn-sm"
-                @click="openModal('edit', item)"
-              >編輯</button>
-              <button
-                type="button"
-                class="btn btn-outline-danger btn-sm"
-                @click="openModal('delete', item)"
-              >刪除</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <th width="55">編號</th>
+          <th width="100">分類</th>
+          <th>產品名稱</th>
+          <th width="120" class="text-right">原價</th>
+          <th width="120" class="text-right">售價</th>
+          <th width="120" class="text-center">啟用狀態</th>
+          <th width="120" class="text-center">編輯</th>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in products" :key="item.id">
+            <td>{{ index +1 }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.title }}</td>
+            <td class="text-right">{{ item.origin_price | currency }}</td>
+            <td class="text-right">{{ item.price | currency }}</td>
+            <td class="text-center">
+              <span v-if="item.is_enabled" class="text-success">啟用</span>
+              <span v-else class="text-secondary">未啟用</span>
+            </td>
+            <td class="text-center">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  @click="openModal('edit', item)"
+                >編輯</button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  @click="openModal('delete', item)"
+                >刪除</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!-- Modal 新增與修改 -->
     <div
       class="modal fade"

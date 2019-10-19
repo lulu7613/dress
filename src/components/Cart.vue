@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="cart-style" style="position: fixed; bottom:5%; right: 1%">
-      <button type="button" class="btn btn-cart" @click="openCartModal()">
+      <button type="button" class="btn btn-cart" :class="animateCss" @click="openCartModal()">
         <i class="fas fa-shopping-cart text-dark fa-3x"></i>
         <span class="badge badge-pill badge-danger bage-num">{{ cartsQty }}</span>
       </button>
@@ -75,14 +75,12 @@ export default {
       cartsQty: 0,
 
       filterLoadingItem: '',
-      isDisabled: ''
+      isDisabled: '',
 
-      // modal 使用的樣式與判斷
-      // isShow: false,
-      // showStyle: {
-      //   display: '',
-      //   backgroundColor: ''
-      // }
+      animateCss: {
+        'animated': false,
+        'swing': false
+      }
     }
   },
 
@@ -96,6 +94,8 @@ export default {
         if (response.data.success) {
           vm.carts = response.data.data
           vm.cartsQty = response.data.data.carts.length
+          vm.animateCss.animated = false
+          vm.animateCss.swing = false
         }
       })
     },
@@ -121,16 +121,13 @@ export default {
     openCartModal () {
       this.getCarts()
       $('#cartModal').modal('show')
-      // this.isShow = true
-      // if (this.isShow) {
-      //   this.showStyle.display = 'block'
-      //   this.showStyle.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-      // }
     },
 
     // 更新 carts 的購買數量 cartsQty
     uptadeCartsQty () {
       this.getCarts()
+      this.animateCss.animated = true
+      this.animateCss.swing = true
     },
 
     // 進入結帳頁面 - 確認購物清單

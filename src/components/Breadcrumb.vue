@@ -3,15 +3,18 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb bg-transparent h5">
         <li class="breadcrumb-item">
-          <router-link to="/customer_products">購物商城</router-link>
+          <router-link class="font-weight-bolder" to="/customer_products">
+            <i class="fas fa-shopping-bag"></i>
+            購物商城
+          </router-link>
           </li>
-        <li class="breadcrumb-item" v-if="propsData.title">
+        <li class="breadcrumb-item font-weight-bolder" v-if="propsData.title">
           <span class="text-primary">{{ propsData.category }}</span>
         </li>
-        <li class="breadcrumb-item active" v-if="!propsData.title">
+        <li class="breadcrumb-item active font-weight-bolder" v-if="!propsData.title">
           {{ propsData.category }}
         </li>
-        <li class="breadcrumb-item active" v-if="propsData.title">
+        <li class="breadcrumb-item active font-weight-bolder" v-if="propsData.title">
           {{ propsData.title }}
         </li>
       </ol>

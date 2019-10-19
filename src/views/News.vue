@@ -5,7 +5,7 @@
         <img class="img-fluid" src="../assets/img/newsBanner01.png" alt="newsBanner" />
       </div>
       <div>
-        <h1 class="h4 text-primary font-weight-bolder mb-3">
+        <h1 class="h5 text-primary font-weight-bolder mb-3">
           <i class="fas fa-bullhorn"></i>
           最新消息
         </h1>

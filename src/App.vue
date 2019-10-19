@@ -17,7 +17,7 @@ body {
   font-family: 'Microsoft JhengHei', Helvetica,Arial, sans-serif
 }
 
-// 定義整體頁面的字體
+// 整體頁面的字體大小
 html {
   font-size: 0.7rem;
 }
@@ -46,7 +46,7 @@ html {
   background-size: cover;
 }
 
-/* 自訂 router-link 的 active 樣式 */
+/* outer-link 的 active 自訂樣式 */
 .router-link-exact-active {
   border: 1px solid #fff;
 }

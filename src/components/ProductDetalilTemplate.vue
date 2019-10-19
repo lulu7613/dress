@@ -51,7 +51,8 @@
       </div>
       <div class="text-muted text-right text-nowrap mt-3" v-if="propsData.num >1">
         小計
-        <strong>{{ propsData.num * propsData.price | currency }}</strong> 元
+        <strong v-if="propsData.price">{{ propsData.num * propsData.price | currency }}元</strong>
+        <strong v-else>{{ propsData.num * propsData.origin_price | currency }}元</strong>
       </div>
     </div>
   </div>

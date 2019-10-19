@@ -48,48 +48,52 @@
 
           <!-- 收合內容 -->
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" style>
-            <table class="table">
-              <thead class="alert-light">
-                <th width="80"></th>
-                <th>商品名稱</th>
-                <th width="60" class="text-right">數量</th>
-                <th width="130" class="text-right">小計</th>
-              </thead>
-              <tbody>
-                <tr v-for="item in orders.carts" :key="item.id">
-                  <td>
-                    <img :src="item.product.imageUrl" class="img-fluid" alt />
-                  </td>
-                  <td class="align-middle">
-                    {{ item.product.title }}
-                    <div class="text-info" v-if="item.coupon">
-                      <small>已套用優惠券</small>
-                    </div>
-                  </td>
-                  <td class="align-middle text-right">{{ item.qty }}件</td>
-                  <td class="align-middle text-right">{{ item.final_total | currency }}</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="3" class="text-right">
-                    <strong>總計</strong>
-                  </td>
-                  <td class="text-right">
-                    <del v-if="orders.final_total !== orders.total">NT {{ orders.total | currency }}</del>
-                    <strong v-else>NT {{ orders.total | currency }}</strong>
-                  </td>
-                </tr>
-                <tr v-if="orders.final_total !== orders.total">
-                  <td colspan="3" class="text-right text-danger">
-                    <strong>折扣價</strong>
-                  </td>
-                  <td class="text-right text-danger h5">
-                    <strong>NT {{ orders.final_total | currency }}</strong>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="alert-light">
+                  <th width="80"></th>
+                  <th>商品名稱</th>
+                  <th width="60" class="text-right">數量</th>
+                  <th width="130" class="text-right">小計</th>
+                </thead>
+                <tbody>
+                  <tr v-for="item in orders.carts" :key="item.id">
+                    <td>
+                      <img :src="item.product.imageUrl" class="img-fluid" alt />
+                    </td>
+                    <td class="align-middle">
+                      {{ item.product.title }}
+                      <div class="text-info" v-if="item.coupon">
+                        <small>已套用優惠券</small>
+                      </div>
+                    </td>
+                    <td class="align-middle text-right">{{ item.qty }}件</td>
+                    <td class="align-middle text-right">{{ item.final_total | currency }}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" class="text-right">
+                      <strong>總計</strong>
+                    </td>
+                    <td class="text-right">
+                      <del
+                        v-if="orders.final_total !== orders.total"
+                      >NT {{ orders.total | currency }}</del>
+                      <strong v-else>NT {{ orders.total | currency }}</strong>
+                    </td>
+                  </tr>
+                  <tr v-if="orders.final_total !== orders.total">
+                    <td colspan="3" class="text-right text-danger">
+                      <strong>折扣價</strong>
+                    </td>
+                    <td class="text-right text-danger h5">
+                      <strong>NT {{ orders.final_total | currency }}</strong>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -226,6 +230,12 @@ export default {
             if (response.data.success) {
               this.$bus.$emit('cartsQty:update')
               vm.$router.push(`/customer_finish/${response.data.orderId}`)
+
+              // localStorage
+              let localData = JSON.parse(localStorage.getItem('dressMyOrder')) || []
+              localData.push({ id: response.data.orderId })
+              console.log('localData', localData)
+              localStorage.setItem('dressMyOrder', JSON.stringify(localData))
             }
           })
         }

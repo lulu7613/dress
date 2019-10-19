@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <loading :active.sync="isLoading"></loading>
     <div class="row my-3">
       <div class="col-md-6">
@@ -10,40 +10,42 @@
       </div>
     </div>
 
-    <table class="table table-hover">
-      <thead>
-        <th>名稱</th>
-        <th width="130">折扣百分比</th>
-        <th width="130">到期日</th>
-        <th width="130">是否啟用</th>
-        <th width="130">編輯</th>
-      </thead>
-      <tbody>
-        <tr v-for="item in coupons" :key="item.id">
-          <td>{{ item.title }}</td>
-          <td>{{ item.percent }}%</td>
-          <td>{{ item.due_date | date }}</td>
-          <td>
-            <span class="text-success" v-if="item.is_enabled">啟用</span>
-            <span class="text-secondary" v-else>不啟用</span>
-          </td>
-          <td>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button
-                type="button"
-                class="btn btn-outline-primary btn-sm"
-                @click="openModal('edit', item)"
-              >編輯</button>
-              <button
-                type="button"
-                class="btn btn-outline-danger btn-sm"
-                @click="openModal('delete', item)"
-              >刪除</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <th>名稱</th>
+          <th width="130">折扣百分比</th>
+          <th width="130">到期日</th>
+          <th width="130">是否啟用</th>
+          <th width="130">編輯</th>
+        </thead>
+        <tbody>
+          <tr v-for="item in coupons" :key="item.id">
+            <td>{{ item.title }}</td>
+            <td>{{ item.percent }}%</td>
+            <td>{{ item.due_date | date }}</td>
+            <td>
+              <span class="text-success" v-if="item.is_enabled">啟用</span>
+              <span class="text-secondary" v-else>不啟用</span>
+            </td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  @click="openModal('edit', item)"
+                >編輯</button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  @click="openModal('delete', item)"
+                >刪除</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- Modal 新增、編輯優惠券 -->
     <div

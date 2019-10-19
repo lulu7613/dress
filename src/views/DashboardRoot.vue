@@ -33,18 +33,23 @@
         </div>
       </slot>
     </Navbar>
-    <router-view></router-view>
+    <div class="container mt-5">
+      <router-view></router-view>
+    </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue'
 import Alert from '../components/AlterMessage.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
   components: {
     Navbar,
-    Alert
+    Alert,
+    Footer
   },
 
   methods: {

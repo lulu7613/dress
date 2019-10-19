@@ -134,7 +134,9 @@ export default {
       const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/pay/${vm.order.id}`
       this.$http.post(api, vm.order.id).then((response) => {
         console.log('完成訂單-結帳付款', response.data)
-        vm.order.is_paid = true
+        if (response.data.success) {
+          vm.order.is_paid = true
+        }
       })
     },
 
