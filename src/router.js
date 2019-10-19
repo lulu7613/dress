@@ -7,15 +7,15 @@ export default new Router({
   routes: [
     {
       path: '*',
-      redirect: '/home'
+      redirect: '/'
     },
     { // 首頁
-      path: '/home',
+      path: '/',
       name: 'Home',
       component: () => import('./views/Home.vue')
     },
     { // 客戶端頁面
-      path: '/',
+      path: '/store',
       name: 'Dashboard',
       component: () => import('./views/Dashboard.vue'),
       children: [
