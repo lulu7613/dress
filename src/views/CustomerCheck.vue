@@ -87,17 +87,17 @@
       </table>
 
       <div class="text-right d-flex mt-5">
-        <button class="btn btn-lg btn-secondary mr-auto" @click="goHomePage()">上一步：繼續購物</button>
+        <router-link class="btn btn-lg btn-secondary mr-auto" to="/store/customer_products">上一步：繼續購物</router-link>
         <button class="btn btn-lg btn-info" @click="goOrder()">下一步：填寫資料</button>
       </div>
     </div>
     <div class="text-center" v-else>
       <p class="h5 mb-4">哎呀！購物車被清光了！要回去購物嗎？</p>
-      <button class="btn btn-lg btn-info" @click="goHomePage()">
+      <router-link class="btn btn-lg btn-info" to="/store/customer_products">
         <i class="fas fa-angle-right"></i>
         回購物商城
         <i class="fas fa-angle-left"></i>
-      </button>
+      </router-link>
     </div>
   </main>
 </template>
@@ -169,15 +169,9 @@ export default {
       })
     },
 
-    // 上一步 (回首頁)
-    goHomePage () {
-      this.$router.push('/customer_products')
-      window.scroll(0, 0)
-    },
-
     // 下一步 (去 customer_order)
     goOrder () {
-      this.$router.push('/customer_order')
+      this.$router.push('/store/customer_order')
       window.scroll(0, 0)
     }
 

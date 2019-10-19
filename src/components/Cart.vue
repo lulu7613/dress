@@ -132,7 +132,7 @@ export default {
 
     // 進入結帳頁面 - 確認購物清單
     goCheck () {
-      this.$router.push('/customer_check')
+      this.$router.push('/store/customer_check')
       $('#cartModal').modal('hide')
     }
 

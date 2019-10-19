@@ -42,10 +42,12 @@ router.beforeEach((to, from, next) => {
       if (response.data.success) {
         next()
       } else {
+        window.scrollTo(0, 0)
         next('/login') // 留在 login 頁面
       }
     })
   } else {
+    window.scrollTo(0, 0)
     next()
   }
 })

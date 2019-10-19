@@ -4,7 +4,7 @@
       <nav class="navbar navbar-expand-md navbar-dark">
         <router-link
           class="navbar-brand font-weight-bolder logo-name"
-          to="/home"
+          to="/"
           style="border:0"
         >翠絲服飾</router-link>
         <button
@@ -25,21 +25,21 @@
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
-                  to="/about"
+                  to="/store/about"
                   style="border:0"
                 >關於翠絲</router-link>
               </li>
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
-                  to="/news"
+                  to="/store/news"
                   style="border:0"
                 >最新消息</router-link>
               </li>
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
-                  to="/customer_products"
+                  to="/store/customer_products"
                   style="border:0"
                 >購物商城</router-link>
               </li>

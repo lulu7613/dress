@@ -62,7 +62,7 @@ export default {
   methods: {
     // 點擊查看更多到商品細項元件 CustomerProduct/:id
     goToProductPage (id) {
-      this.$router.push(`/customer_product/${id}`)
+      this.$router.push(`/store/customer_product/${id}`)
       this.$emit('emit', id)
     },
 

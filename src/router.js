@@ -20,17 +20,17 @@ export default new Router({
       component: () => import('./views/Dashboard.vue'),
       children: [
         { // 關於翠絲
-          path: '/about',
+          path: 'about',
           name: 'About',
           component: () => import('./views/About.vue')
         },
         { // 最新消息
-          path: '/news',
+          path: 'news',
           name: 'News',
           component: () => import('./views/News.vue')
         },
         {
-          path: '/customer_products', // 全部商品
+          path: 'customer_products', // 全部商品
           name: 'CustomerProducts',
           component: () => import('./views/CustomerProducts.vue')
         },

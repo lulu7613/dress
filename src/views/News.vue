@@ -1,20 +1,31 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container mb-5">
       <div class="news-banner my-5">
         <img class="img-fluid" src="../assets/img/newsBanner01.png" alt="newsBanner" />
       </div>
       <div>
         <h1 class="h5 text-primary font-weight-bolder mb-3">
-          <i class="fas fa-bullhorn"></i>
+          <i class="fas fa-rss"></i>
           最新消息
         </h1>
-        <ul class="news-list" v-for="(item, index) in news" :key="index">
+        <ul class="news-list pl-0" v-for="(item, index) in news" :key="index">
           <li class="border-bottom pb-2 mb-3">
             <p class="h3 text-info font-weight-bolder">{{item.year}}年 {{item.date}}</p>
             <p class="h5 font-weight-bolder" style="color: #444444">{{item.content}}</p>
           </li>
         </ul>
+      </div>
+      <h4 class="text-primary font-weight-bolder text-center mt-5">想更了解翠絲？點進來看看吧！</h4>
+      <div class="my-4 text-center">
+        <router-link class="btn btn-lg btn-primary" to="/store/about">
+          <i class="fas fa-pencil-alt"></i>
+          關於翠絲
+        </router-link>
+        <router-link class="btn btn-lg btn-info ml-5" to="/store/customer_products">
+          <i class="fas fa-shopping-cart"></i>
+          購物商城
+        </router-link>
       </div>
     </div>
   </div>

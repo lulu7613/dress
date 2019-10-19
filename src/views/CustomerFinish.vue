@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="mt-3 text-info" style="font-size: 1.2rem" v-if="order.is_paid">
+    <div class="mt-3 text-primary" style="font-size: 1.2rem" v-if="order.is_paid">
       <strong>{{ order.user.name }}</strong> 小姐/先生：
       <br />感謝您對
       <strong>翠絲服飾</strong> 的支持，以下是您的結帳明細，請妥善保管哦。
@@ -91,12 +91,17 @@
         </div>
       </div>
     </form>
-    <div class="text-center">
-      <button class="btn btn-info btn-lg" v-if="order.is_paid" @click="goHomePage()">
+    <div class="text-center" v-if="order.is_paid">
+      <router-link class="btn btn-primary btn-lg" to="/store/customer_products">
         <i class="fas fa-angle-right"></i>
-        回購物商城
+        繼續購物
         <i class="fas fa-angle-left"></i>
-      </button>
+      </router-link>
+      <router-link class="btn btn-info btn-lg ml-5" to="/store/my_order">
+        <i class="fas fa-angle-right"></i>
+        我的訂單
+        <i class="fas fa-angle-left"></i>
+      </router-link>
     </div>
   </main>
 </template>
@@ -138,14 +143,7 @@ export default {
           vm.order.is_paid = true
         }
       })
-    },
-
-    // 回首頁
-    goHomePage () {
-      this.$router.push('/customer_products')
-      window.scroll(0, 0)
     }
-
   },
 
   created () {

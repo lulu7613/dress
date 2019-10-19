@@ -45,7 +45,7 @@
                 <i class="fas fa-angle-right" v-if="type === 'discount'"></i>
                 清倉55折
               </a>
-              <router-link class="nav-link products-my-order" to="/my_order" v-if="myOrder">
+              <router-link class="nav-link products-my-order" to="/store/my_order" v-if="myOrder">
                 <i class="fas fa-heart"></i>
                 我的訂單
               </router-link>

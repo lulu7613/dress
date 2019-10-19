@@ -278,12 +278,12 @@ export default {
     // 前往付款頁面 ( customer_finish/:id )
     goPay (id) {
       $('#orderDetialModal').modal('hide')
-      this.$router.push(`/customer_finish/${id}`)
+      this.$router.push(`/store/customer_finish/${id}`)
     },
 
     // 回首頁
     goHomePage () {
-      this.$router.push('/customer_products')
+      this.$router.push('/store/customer_products')
       window.scroll(0, 0)
     }
   },

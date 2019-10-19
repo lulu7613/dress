@@ -4,16 +4,16 @@
       <div class="container-fluid pt-3 pt-lg-5">
         <div class="row justify-content-center">
           <div class="col-sm-5 col-md-6 mb-5 text-center text-md-right">
-            <router-link to="/customer_products">
+            <router-link to="store/customer_products">
               <img class="logo img-fluid" src="../assets/img/logo03.png" alt="logo.png" />
             </router-link>
           </div>
           <ul class="nav flex-column col-sm-7 col-md-6 text-center text-md-left align-self-center">
             <li class="nav-item">
-              <router-link class="home-text px-5 text-info" to="/about">關於翠絲</router-link>
+              <router-link class="home-text px-5 text-info" to="/store/about">關於翠絲</router-link>
             </li>
             <li class="nav-item mt-4">
-              <router-link class="home-text px-5 mt-4 text-primary" to="/news">最新消息</router-link>
+              <router-link class="home-text px-5 mt-4 text-primary" to="/store/news">最新消息</router-link>
             </li>
           </ul>
         </div>
