@@ -96,6 +96,10 @@
               class="text-danger text-center"
               v-if="type === 'search' && filterProducts.length === 0"
             >哎呀！我們搜尋不到您輸入的關鍵字。</p>
+            <p
+              class="text-danger text-center"
+              v-if="type === 'favorite' && filterProducts.length === 0"
+            >您還沒有加入我的最愛商品，趕快去逛逛吧～</p>
           </div>
         </div>
       </div>
