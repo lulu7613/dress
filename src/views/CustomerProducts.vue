@@ -8,9 +8,10 @@
         <div class="row">
           <!-- 列表 -->
           <div class="col-md-2 mb-4">
-            <div class="nav flex-column nav-pills sticky-top">
+            <div class="nav flex-column sticky-top">
               <a
                 class="nav-link mb-2 active products-type"
+                :class="{'products-active': type === 'all'}"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('all')"
@@ -20,6 +21,7 @@
               </a>
               <a
                 class="nav-link mb-2 products-type"
+                :class="{'products-active': type === 'topic'}"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('topic')"
@@ -29,6 +31,7 @@
               </a>
               <a
                 class="nav-link mb-2 products-type"
+                :class="{'products-active': type === 'hot'}"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('hot')"
@@ -38,6 +41,7 @@
               </a>
               <a
                 class="nav-link products-type"
+                :class="{'products-active': type === 'discount'}"
                 data-toggle="pill"
                 href="#"
                 @click.prevent="getfilterProducts('discount')"
@@ -66,7 +70,7 @@
                 </div>
               </div>
               <a
-                class="nav-link mb-2 my-products"
+                class="nav-link mb-2 my-products animated slideInLeft"
                 href="#"
                 v-if="myFavorite.length > 0"
                 @click.prevent="getfilterProducts('favorite')"
@@ -75,7 +79,7 @@
                 我的最愛
               </a>
               <router-link
-                class="nav-link my-products"
+                class="nav-link my-products animated slideInLeft"
                 to="/store/my_order"
                 v-if="myOrder.length > 0"
               >
@@ -125,11 +129,12 @@ export default {
         category: '全部商品'
       },
       products: [],
-      type: '',
+      type: 'all',
       filterProducts: [],
       myOrder: JSON.parse(localStorage.getItem('dressMyOrder')) || [],
       myFavorite: JSON.parse(localStorage.getItem('dressMyFavorite')) || [],
       keyword: '',
+
       isLoading: false
 
     }
@@ -224,14 +229,20 @@ export default {
 </script>
 
 <style>
+.products-active {
+  background-color: #4b9983;
+  color: #fff;
+  z-index: 1040;
+}
+
 .products-type {
   border: 1px dashed #4b9983;
 }
 
-.products-type:hover {
+/* .products-type:hover {
   color: #eb6241;
   background-color: #fce6a9;
-}
+} */
 
 .my-products {
   border: 1px dashed #eb6241;
