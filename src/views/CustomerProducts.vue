@@ -200,9 +200,16 @@ export default {
     },
 
     // localStorage 獲取 favorite 變化
-    getFavorite () {
+    getFavorite (itemId) {
       const vm = this
       vm.myFavorite = JSON.parse(localStorage.getItem('dressMyFavorite')) || []
+      if (vm.type === 'favorite') {
+        vm.filterProducts.filter((item, index) => {
+          if (item.id === itemId) {
+            vm.filterProducts.splice(index, 1)
+          }
+        })
+      }
     }
   },
 

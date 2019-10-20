@@ -114,11 +114,11 @@ export default {
       const vm = this
       vm.myFavorite.push(item)
       localStorage.setItem('dressMyFavorite', JSON.stringify(vm.myFavorite))
-      vm.$emit('emitFavoriteId')
+      vm.$emit('emitFavoriteId', item.id)
       vm.$bus.$emit('messsage:push', '商品加入我的最愛囉～', 'success')
     },
 
-    // 移除最愛
+    // localStorage 移除我的最愛
     removeFavorite (item) {
       const vm = this
       vm.myFavorite.filter((obj, index) => {
@@ -127,7 +127,7 @@ export default {
         }
       })
       localStorage.setItem('dressMyFavorite', JSON.stringify(vm.myFavorite))
-      vm.$emit('emitFavoriteId')
+      vm.$emit('emitFavoriteId', item.id)
       vm.$bus.$emit('messsage:push', '商品從我的最愛移除！', 'danger')
     }
   }
