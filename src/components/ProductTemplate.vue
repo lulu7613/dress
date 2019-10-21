@@ -20,8 +20,13 @@
         >
           <i class="far fa-heart"></i>
         </span>
-        <img :src="item.imageUrl" class="card-img-top pt-3 px-3" :alt="item.title" />
-        <div class="card-body">
+        <img
+          :src="item.imageUrl"
+          class="card-img-top cursor-point pt-3 px-3"
+          :alt="item.title"
+          @click="goToProductPage(item.id)"
+        />
+        <div class="card-body cursor-point" @click="goToProductPage(item.id)">
           <span
             class="badge badge-secondary float-right ml-2"
             v-if="item.category === '主題商品'"
@@ -36,16 +41,19 @@
           >{{ item.category }}</span>
 
           <h6 class="card-title">
-            <a href="#" class="text-dark" @click="goToProductPage(item.id)">{{item.title}}</a>
+            <a href="#" class="text-dark">{{item.title}}</a>
           </h6>
           <div class="d-flex justify-content-between align-items-baseline">
-            <div class="h6 font-weight-bold" v-if="!item.price">NT{{item.origin_price | currency}}</div>
-            <del v-if="item.price">
+            <div
+              class="h6 font-weight-bold"
+              v-if="item.price === item.origin_price"
+            >NT{{ item.origin_price | currency}}</div>
+            <del v-if="item.price !== item.origin_price">
               <small>原價 NT{{item.origin_price | currency}}</small>
             </del>
             <div
               class="h6 text-danger font-weight-bold"
-              v-if="item.price"
+              v-if="item.price !== item.origin_price"
             >特價 NT{{item.price | currency}}</div>
           </div>
         </div>

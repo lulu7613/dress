@@ -88,7 +88,7 @@
 
       <div class="text-right d-flex mt-5">
         <router-link class="btn btn-lg btn-secondary mr-auto" to="/store/customer_products">上一步：繼續購物</router-link>
-        <button class="btn btn-lg btn-info" @click="goOrder()">下一步：填寫資料</button>
+        <button class="btn btn-lg btn-primary" @click="goOrder()">下一步：填寫資料</button>
       </div>
     </div>
     <div class="text-center" v-else>

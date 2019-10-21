@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="about-banner my-5">
-        <img class="img-fluid" src="../assets/img/aboutBanner02.png" alt="aboutBanner" />
+        <img class="img-fluid" src="../assets/img/aboutBanner01.png" alt="aboutBanner" />
       </div>
       <p class="h1 font-weight-bolder my-5">"我的 T-Shirt，就是和你不一樣！"</p>
       <div>
@@ -16,7 +16,7 @@
             <br />店內販售各種款式的 T-Shirt，有搞怪、人物、文字，最潮最時尚的 T-Shirt，在翠絲服飾都找的到。
           </p>
         </blockquote>
-        <h5 class="text-info font-weight-bolder">本店的商品含棉量超過 75%！</h5>
+        <h5 class="text-dark font-weight-bolder">本店的商品含棉量超過 75%！</h5>
         <blockquote class="blockquote pb-2">
           <p>
             含棉量高的衣服好在哪裡呢？
@@ -26,7 +26,7 @@
             <br />
           </p>
         </blockquote>
-        <h5 class="text-info font-weight-bolder">為什麼不是 100% 純棉？</h5>
+        <h5 class="text-dark font-weight-bolder">為什麼不是 100% 純棉？</h5>
         <blockquote class="blockquote pb-2">
           <p>
             以標準來說，
@@ -36,7 +36,7 @@
             <br />
           </p>
         </blockquote>
-        <h5 class="text-info font-weight-bolder">翠絲秉持誠實理念，有多少說多少！</h5>
+        <h5 class="text-dark font-weight-bolder">翠絲秉持誠實理念，有多少說多少！</h5>
         <blockquote class="blockquote pb-2">
           <p>
             目前實際加工的情況，
@@ -52,7 +52,7 @@
             <i class="fas fa-rss"></i>
             最新消息
           </router-link>
-          <router-link class="btn btn-lg btn-info ml-5" to="/store/customer_products">
+          <router-link class="btn btn-lg btn-primary ml-5" to="/store/customer_products">
             <i class="fas fa-shopping-cart"></i>
             購物商城
           </router-link>

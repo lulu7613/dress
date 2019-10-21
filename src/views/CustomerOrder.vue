@@ -179,7 +179,7 @@
             class="btn btn-lg btn-secondary mr-auto"
             to="/store/customer_products"
           >取消訂單：回首頁</router-link>
-          <button class="btn btn-lg btn-info">下一步：送出訂單</button>
+          <button class="btn btn-lg btn-primary">下一步：送出訂單</button>
         </div>
       </form>
     </div>

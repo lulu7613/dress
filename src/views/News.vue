@@ -2,7 +2,7 @@
   <div>
     <div class="container mb-5">
       <div class="news-banner my-5">
-        <img class="img-fluid" src="../assets/img/newsBanner01.png" alt="newsBanner" />
+        <img class="img-fluid" src="../assets/img/newsBanner02.png" alt="newsBanner" />
       </div>
       <div>
         <h1 class="h5 text-primary font-weight-bolder mb-3">
@@ -22,7 +22,7 @@
           <i class="fas fa-pencil-alt"></i>
           關於翠絲
         </router-link>
-        <router-link class="btn btn-lg btn-info ml-5" to="/store/customer_products">
+        <router-link class="btn btn-lg btn-primary ml-5" to="/store/customer_products">
           <i class="fas fa-shopping-cart"></i>
           購物商城
         </router-link>

@@ -46,6 +46,10 @@ html {
   background-size: cover;
 }
 
+.cursor-point {
+  cursor: pointer;
+}
+
 /* outer-link 的 active 自訂樣式 */
 .router-link-exact-active {
   border: 1px solid #fff;

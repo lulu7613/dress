@@ -1,7 +1,7 @@
 <template>
     <carousel :per-page="1" :paginationEnabled="false" :mouse-drag="false" :autoplay="true" :loop="true">
       <slide>
-          <img src="../assets/img/banner01.jpg" class="d-block w-100" alt="banner01.jpg" />
+          <img src="../assets/img/banner01.png" class="d-block w-100" alt="banner01.jpg" />
       </slide>
       <slide>
           <img src="../assets/img/banner02.png" class="d-block w-100" alt="banner02.jpg" />

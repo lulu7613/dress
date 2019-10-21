@@ -46,13 +46,16 @@
           <p>{{tempProduct.content}}</p>
           <div class="d-flex justify-content-end align-items-end">
             <del>
-              <div class="h5" v-if="tempProduct.price">原價 NT$ {{tempProduct.origin_price}}</div>
+              <div
+                class="h5"
+                v-if="tempProduct.origin_price !== tempProduct.origin_price"
+              >原價 NT$ {{tempProduct.origin_price}}</div>
             </del>
-            <div class="h3 ml-auto text-danger" v-if="tempProduct.price">
+            <div class="h3 ml-auto text-danger" v-if="tempProduct.origin_price !== tempProduct.origin_price">
               <small class="font-weight-bold">特價 NT$</small>
               <strong>{{ tempProduct.price }}</strong>
             </div>
-            <div class="h3 ml-auto text-danger" v-if="!tempProduct.price">
+            <div class="h3 ml-auto text-danger" v-if="tempProduct.origin_price === tempProduct.origin_price">
               <small class="font-weight-bold">售價 $NT</small>
               <strong>{{tempProduct.origin_price}}</strong>
             </div>
@@ -75,7 +78,9 @@
           </div>
           <div class="text-muted text-right text-nowrap mt-3" v-if="tempProduct.num >1">
             小計
-            <strong v-if="tempProduct.price">{{ tempProduct.num * tempProduct.price | currency }}元</strong>
+            <strong
+              v-if="tempProduct.price > 0"
+            >{{ tempProduct.num * tempProduct.price | currency }}元</strong>
             <strong v-else>{{ tempProduct.num * tempProduct.origin_price | currency }}元</strong>
           </div>
         </div>
@@ -174,6 +179,27 @@ export default {
       vm.products.forEach((item) => {
         if (item.id !== vm.tempProduct.id && item.category === vm.tempProduct.category) {
           vm.sameCategoryProducts.push(item)
+        }
+      })
+    },
+
+    // 加入購物車 (qty 為 1) /api/:api_path/cart
+    addCart (id, qty = 1) {
+      const vm = this
+      vm.filterLoadingItem = id
+      vm.isDisabled = id
+      const postData = {
+        'product_id': id,
+        'qty': qty
+      }
+      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart`
+      vm.$http.post(api, { data: postData }).then((response) => {
+        console.log('加入購物車(temp)', response.data)
+        if (response.data.success) {
+          vm.filterLoadingItem = ''
+          vm.isDisabled = ''
+          vm.$bus.$emit('messsage:push', response.data.message, 'success')
+          vm.$bus.$emit('cartsQty:update')
         }
       })
     },

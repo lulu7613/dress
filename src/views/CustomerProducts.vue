@@ -240,8 +240,7 @@ export default {
 }
 
 /* .products-type:hover {
-  color: #eb6241;
-  background-color: #fce6a9;
+  color: #4b9983;
 } */
 
 .my-products {

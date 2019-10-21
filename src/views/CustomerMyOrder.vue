@@ -55,7 +55,7 @@
 
           <!-- 內容 -->
           <div class="col-md-10">
-            <h1 class="h5 text-info font-weight-bolder mb-3">
+            <h1 class="h5 text-primary font-weight-bolder mb-3">
               <i class="fas fa-columns"></i>
               我的訂單
             </h1>
@@ -101,7 +101,7 @@
               </table>
             </div>
             <div class="text-center">
-              <button class="btn btn-info btn-lg" @click="goHomePage()">
+              <button class="btn btn-primary btn-lg" @click="goHomePage()">
                 <i class="fas fa-angle-right"></i>
                 回購物商城
                 <i class="fas fa-angle-left"></i>
