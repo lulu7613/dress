@@ -105,7 +105,7 @@ export default {
   data () {
     return {
       email: '',
-      type: ''
+      type: 'all'
     }
   },
 

@@ -9,11 +9,6 @@ export default new Router({
       path: '*',
       redirect: '/'
     },
-    // { // 首頁
-    //   path: '/',
-    //   name: 'Home1',
-    //   component: () => import('./views/Home.vue')
-    // },
     { // 客戶端頁面
       path: '/',
       name: 'Dashboard',
