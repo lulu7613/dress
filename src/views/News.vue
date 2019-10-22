@@ -18,11 +18,11 @@
       </div>
       <h4 class="text-primary font-weight-bolder text-center mt-5">想更了解翠絲？點進來看看吧！</h4>
       <div class="my-4 text-center">
-        <router-link class="btn btn-lg btn-primary" to="/store/about">
+        <router-link class="btn btn-lg btn-primary" to="/about">
           <i class="fas fa-pencil-alt"></i>
           關於翠絲
         </router-link>
-        <router-link class="btn btn-lg btn-primary ml-5" to="/store/customer_products">
+        <router-link class="btn btn-lg btn-primary ml-5" to="/customer_products">
           <i class="fas fa-shopping-cart"></i>
           購物商城
         </router-link>

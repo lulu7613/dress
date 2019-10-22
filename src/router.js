@@ -9,16 +9,21 @@ export default new Router({
       path: '*',
       redirect: '/'
     },
-    { // 首頁
-      path: '/',
-      name: 'Home',
-      component: () => import('./views/Home.vue')
-    },
+    // { // 首頁
+    //   path: '/',
+    //   name: 'Home1',
+    //   component: () => import('./views/Home.vue')
+    // },
     { // 客戶端頁面
-      path: '/store',
+      path: '/',
       name: 'Dashboard',
       component: () => import('./views/Dashboard.vue'),
       children: [
+        { // 關於翠絲
+          path: '/',
+          name: 'Home',
+          component: () => import('./views/Home.vue')
+        },
         { // 關於翠絲
           path: 'about',
           name: 'About',

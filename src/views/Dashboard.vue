@@ -1,7 +1,8 @@
 <template>
   <div>
     <Alert />
-    <Navbar />
+    <Navbar v-if="$route.name !== 'Home'" />
+    <!-- <Navbar /> -->
     <router-view></router-view>
     <Cart v-if="$route.name === 'CustomerProducts' || $route.name === 'CustomerProduct'" />
     <Footer />

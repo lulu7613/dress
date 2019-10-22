@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb bg-transparent h5">
         <li class="breadcrumb-item">
-          <router-link class="font-weight-bolder" to="/store/customer_products">
+          <router-link class="font-weight-bolder" to="/customer_products">
             <i class="fas fa-shopping-cart"></i>
             購物商城
           </router-link>

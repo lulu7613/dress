@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container col-12 col-md-8 col-xl-4 mt-3 mt-md-5 p-5 border-warning border">
+    <div class="container col-12 col-md-8 col-xl-4 mt-3 mt-md-5 p-5 border-primary border">
       <h1 class="h3 text-center font-weight-bold member-title mb-4">管理員登入</h1>
       <div class="form-group">
         <label for="Email">帳號</label>
@@ -35,7 +35,7 @@
         <input type="checkbox" class="form-check-input" id="remember" />
         <label class="form-check-label" for="remember">記住我</label>
       </div>
-      <button type="button" class="btn btn-warning btn-block" @click="login()">Sign in</button>
+      <button type="button" class="btn btn-primary btn-block" @click="login()">Sign in</button>
       <router-link class="btn btn-light btn-block" to="/">回購物網</router-link>
     </div>
   </div>
@@ -80,7 +80,7 @@ export default {
 
 <style scoped>
 .border {
-  border-top: 5px solid #fd7e14 !important;
+  border-top: 5px solid #49947f !important;
 }
 
 .member-title {

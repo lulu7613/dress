@@ -80,7 +80,7 @@
               </a>
               <router-link
                 class="nav-link my-products animated slideInLeft"
-                to="/store/my_order"
+                to="/my_order"
                 v-if="myOrder.length > 0"
               >
                 <i class="fas fa-columns"></i>
@@ -129,7 +129,7 @@ export default {
         category: '全部商品'
       },
       products: [],
-      type: 'all',
+      type: '',
       filterProducts: [],
       myOrder: JSON.parse(localStorage.getItem('dressMyOrder')) || [],
       myFavorite: JSON.parse(localStorage.getItem('dressMyFavorite')) || [],
@@ -142,7 +142,7 @@ export default {
 
   methods: {
     // 取得全部商品列表
-    getProdects () {
+    getProdects (type = 'all') {
       const vm = this
       vm.isLoading = true
       const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/products/all`
@@ -151,6 +151,7 @@ export default {
         if (response.data.success) {
           vm.products = response.data.products
           vm.filterProducts = response.data.products
+          vm.getfilterProducts(type)
           vm.isLoading = false
         }
       })
@@ -159,7 +160,8 @@ export default {
     // 篩選商品列表
     getfilterProducts (type) {
       const vm = this
-      if (type === 'all') {
+      vm.type = type
+      if (vm.type === 'all') {
         vm.type = 'all'
         vm.Breadcrumb.category = '全部商品'
         vm.filterProducts = []
@@ -173,7 +175,7 @@ export default {
             vm.filterProducts.push(item)
           }
         })
-      } else if (type === 'hot') {
+      } else if (vm.type === 'hot') {
         vm.type = 'hot'
         vm.Breadcrumb.category = '人氣精選'
         vm.filterProducts = []
@@ -182,7 +184,7 @@ export default {
             vm.filterProducts.push(item)
           }
         })
-      } else if (type === 'discount') {
+      } else if (vm.type === 'discount') {
         vm.type = 'discount'
         vm.Breadcrumb.category = '清倉55折'
         vm.filterProducts = []
@@ -191,7 +193,7 @@ export default {
             vm.filterProducts.push(item)
           }
         })
-      } else if (type === 'search') {
+      } else if (vm.type === 'search') {
         vm.type = 'search'
         vm.Breadcrumb.category = `搜尋: ${vm.keyword}`
         vm.filterProducts = []
@@ -201,7 +203,7 @@ export default {
           }
         })
         vm.keyword = ''
-      } else if (type === 'favorite') {
+      } else if (vm.type === 'favorite') {
         vm.type = 'favorite'
         vm.Breadcrumb.category = `我的最愛`
         vm.filterProducts = vm.myFavorite
@@ -223,7 +225,17 @@ export default {
   },
 
   created () {
-    this.getProdects()
+    const vm = this
+    vm.getProdects()
+
+    // $on 自定義事件 (類似原生 JS 的 addEventListener)
+    vm.$bus.$on('getProductsType:type', (type) => {
+      this.getProdects(type)
+    })
+  },
+
+  beforeDestroy () {
+    this.$bus.$off('getProductsType:type')
   }
 }
 </script>

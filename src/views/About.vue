@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <div class="about-banner my-5">
+      <div class="my-5">
         <img class="img-fluid" src="../assets/img/aboutBanner01.png" alt="aboutBanner" />
       </div>
       <p class="h1 font-weight-bolder my-5">"我的 T-Shirt，就是和你不一樣！"</p>
@@ -48,11 +48,11 @@
         </blockquote>
         <h4 class="text-primary font-weight-bolder text-center text-sm-left">心動不如行動，進來翠絲逛逛吧！</h4>
         <div class="my-4 text-center text-sm-left">
-          <router-link class="btn btn-lg btn-primary" to="/store/news">
+          <router-link class="btn btn-lg btn-primary" to="/news">
             <i class="fas fa-rss"></i>
             最新消息
           </router-link>
-          <router-link class="btn btn-lg btn-primary ml-5" to="/store/customer_products">
+          <router-link class="btn btn-lg btn-primary ml-5" to="/customer_products">
             <i class="fas fa-shopping-cart"></i>
             購物商城
           </router-link>

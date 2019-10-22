@@ -87,13 +87,13 @@
       </table>
 
       <div class="text-right d-flex mt-5">
-        <router-link class="btn btn-lg btn-secondary mr-auto" to="/store/customer_products">上一步：繼續購物</router-link>
+        <router-link class="btn btn-lg btn-secondary mr-auto" to="/customer_products">上一步：繼續購物</router-link>
         <button class="btn btn-lg btn-primary" @click="goOrder()">下一步：填寫資料</button>
       </div>
     </div>
     <div class="text-center" v-else>
       <p class="h5 mb-4">哎呀！購物車被清光了！要回去購物嗎？</p>
-      <router-link class="btn btn-lg btn-info" to="/store/customer_products">
+      <router-link class="btn btn-lg btn-primary" to="/customer_products">
         <i class="fas fa-angle-right"></i>
         回購物商城
         <i class="fas fa-angle-left"></i>
@@ -171,7 +171,7 @@ export default {
 
     // 下一步 (去 customer_order)
     goOrder () {
-      this.$router.push('/store/customer_order')
+      this.$router.push('/customer_order')
       window.scroll(0, 0)
     }
 

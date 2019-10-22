@@ -75,6 +75,10 @@
               <td>{{ order.user.address }}</td>
             </tr>
             <tr>
+              <th class="alert-light">留言</th>
+              <td>{{ order.message }}</td>
+            </tr>
+            <tr>
               <th class="alert-light">付款狀態</th>
               <td>
                 <span class="text-danger" v-if="!order.is_paid">尚未付款</span>
@@ -92,15 +96,13 @@
       </div>
     </form>
     <div class="text-center" v-if="order.is_paid">
-      <router-link class="btn btn-primary btn-lg" to="/store/customer_products">
-        <i class="fas fa-angle-right"></i>
+      <router-link class="btn btn-primary btn-lg" to="/customer_products">
+        <i class="fas fa-shopping-cart"></i>
         繼續購物
-        <i class="fas fa-angle-left"></i>
       </router-link>
-      <router-link class="btn btn-info btn-lg ml-5" to="/store/my_order">
-        <i class="fas fa-angle-right"></i>
+      <router-link class="btn btn-primary btn-lg ml-5" to="/my_order">
+        <i class="fas fa-columns"></i>
         我的訂單
-        <i class="fas fa-angle-left"></i>
       </router-link>
     </div>
   </main>

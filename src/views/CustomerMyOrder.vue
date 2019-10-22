@@ -149,8 +149,8 @@
                   </li>
                   <li class="mb-3 d-flex d-lg-block">
                     <div class="text-info font-weight-bolder align-self-center">是否付款</div>
-                    <strong v-if="tempOrder.is_paid" class="ml-3 text-success align-self-center">已付款</strong>
-                    <span v-if="!tempOrder.is_paid" class="ml-3 text-muted align-self-center">未付款</span>
+                    <strong v-if="tempOrder.is_paid" class="text-success align-self-center">已付款</strong>
+                    <span v-if="!tempOrder.is_paid" class="text-muted align-self-center">未付款</span>
                     <button
                       v-if="!tempOrder.is_paid"
                       class="btn btn-sm btn-info ml-2"
@@ -265,6 +265,8 @@ export default {
             }).includes(itemA.id)
           })
           vm.isLoading = false
+        } else {
+          vm.$router.push(`/customer_products`)
         }
       })
     },
@@ -278,12 +280,12 @@ export default {
     // 前往付款頁面 ( customer_finish/:id )
     goPay (id) {
       $('#orderDetialModal').modal('hide')
-      this.$router.push(`/store/customer_finish/${id}`)
+      this.$router.push(`/customer_finish/${id}`)
     },
 
     // 回首頁
     goHomePage () {
-      this.$router.push('/store/customer_products')
+      this.$router.push('/customer_products')
       window.scroll(0, 0)
     }
   },

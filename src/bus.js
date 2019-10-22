@@ -9,7 +9,3 @@ Vue.prototype.$bus = new Vue()
 
 // Footer (update 購物車購買數字)
 // this.$bus.$emit('cartsQty:update')
-
-// CustomerProductsSearch (搜尋內容)
-// vm.$bus.$emit('search:array', keyword)
-// search(string): 搜尋的關鍵字

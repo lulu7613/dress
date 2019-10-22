@@ -25,7 +25,7 @@
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
-                  to="/store/about"
+                  to="/about"
                   style="border:0"
                 >
                 <i class="fas fa-map-marker-alt" v-if="$route.name === 'About'"></i>
@@ -34,7 +34,7 @@
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
-                  to="/store/news"
+                  to="/news"
                   style="border:0"
                 >
                 <i class="fas fa-map-marker-alt" v-if="$route.name === 'News'"></i>
@@ -43,7 +43,7 @@
               <li class="nav-item active">
                 <router-link
                   class="nav-link font-weight-bold"
-                  to="/store/customer_products"
+                  to="/customer_products"
                   style="border:0"
                 >
                 <i class="fas fa-map-marker-alt" v-if="$route.name === 'CustomerProducts'"></i>

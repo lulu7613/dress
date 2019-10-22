@@ -177,7 +177,7 @@
         <div class="text-right d-flex mt-5">
           <router-link
             class="btn btn-lg btn-secondary mr-auto"
-            to="/store/customer_products"
+            to="/customer_products"
           >取消訂單：回首頁</router-link>
           <button class="btn btn-lg btn-primary">下一步：送出訂單</button>
         </div>
@@ -232,7 +232,7 @@ export default {
             console.log('填寫訂單資料-送出訂單', response.data)
             if (response.data.success) {
               this.$bus.$emit('cartsQty:update')
-              vm.$router.push(`/store/customer_finish/${response.data.orderId}`)
+              vm.$router.push(`/customer_finish/${response.data.orderId}`)
 
               // localStorage
               let localData = JSON.parse(localStorage.getItem('dressMyOrder')) || []
