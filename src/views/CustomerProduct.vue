@@ -233,11 +233,6 @@ export default {
 
   created () {
     this.getProducts()
-  },
-
-  // 更新頁面時，回到頂端
-  updated () {
-    window.scroll(0, 0)
   }
 }
 </script>
