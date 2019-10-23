@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-5" v-for="item in propsData" :key="item.id">
+    <div class="col-md-6 col-lg-4 col-xl-4 mb-5" v-for="item in propsData" :key="item.id">
       <div class="card product-template">
         <span
           title="移除最愛"

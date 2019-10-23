@@ -7,48 +7,40 @@
       <div class="container-fluid">
         <div class="row">
           <!-- 列表 -->
-          <div class="col-md-2 mb-4">
+          <div class="col-lg-2 mb-4">
             <div class="nav flex-column sticky-top">
-              <a
+              <span
                 class="nav-link mb-2 active products-type"
                 :class="{'products-active': type === 'all'}"
-                data-toggle="pill"
-                href="#"
                 @click.prevent="getfilterProducts('all')"
               >
                 <i class="fas fa-angle-right" v-if="type === 'all'"></i>
                 全部商品
-              </a>
-              <a
+              </span>
+              <span
                 class="nav-link mb-2 products-type"
                 :class="{'products-active': type === 'topic'}"
-                data-toggle="pill"
-                href="#"
                 @click.prevent="getfilterProducts('topic')"
               >
                 <i class="fas fa-angle-right" v-if="type === 'topic'"></i>
                 主題商品
-              </a>
-              <a
+              </span>
+              <span
                 class="nav-link mb-2 products-type"
                 :class="{'products-active': type === 'hot'}"
-                data-toggle="pill"
-                href="#"
                 @click.prevent="getfilterProducts('hot')"
               >
                 <i class="fas fa-angle-right" v-if="type === 'hot'"></i>
                 人氣精選
-              </a>
-              <a
+              </span>
+              <span
                 class="nav-link products-type"
                 :class="{'products-active': type === 'discount'}"
-                data-toggle="pill"
-                href="#"
                 @click.prevent="getfilterProducts('discount')"
               >
                 <i class="fas fa-angle-right" v-if="type === 'discount'"></i>
                 清倉55折
-              </a>
+              </span>
 
               <div class="input-group mt-2 mb-3">
                 <input
@@ -89,7 +81,7 @@
             </div>
           </div>
           <!-- 內容 -->
-          <div class="col-md-10">
+          <div class="col-lg-10">
             <Breadcrumb class="pl-0" :propsData="Breadcrumb" />
             <ProductTemplate
               :propsData="filterProducts"
@@ -241,19 +233,17 @@ export default {
 </script>
 
 <style>
+.products-type {
+  border: 1px dashed #4b9983;
+  cursor: pointer;
+  color: #4b9983
+}
+
 .products-active {
   background-color: #4b9983;
   color: #fff;
   z-index: 1040;
 }
-
-.products-type {
-  border: 1px dashed #4b9983;
-}
-
-/* .products-type:hover {
-  color: #4b9983;
-} */
 
 .my-products {
   border: 1px dashed #eb6241;
