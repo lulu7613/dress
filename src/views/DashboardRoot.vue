@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"></loading>
     <Alert />
     <Navbar>
       <slot>
@@ -45,11 +46,17 @@ import Navbar from '../components/Navbar.vue'
 import Alert from '../components/AlterMessage.vue'
 import Footer from '../components/Footer.vue'
 
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
     Navbar,
     Alert,
     Footer
+  },
+
+  computed: {
+    ...mapGetters(['isLoading'])
   },
 
   methods: {

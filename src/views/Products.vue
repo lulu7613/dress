@@ -240,6 +240,7 @@
 <script>
 import $ from 'jquery'
 import Page from '../components/Pagination.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -251,25 +252,26 @@ export default {
       products: [],
       tempProduct: {},
       pagination: {},
-      modalType: 'new', // 判別開啟的 Modal 是新建、編輯、刪除
-
-      isLoading: false, // vue-loading-overlay Loading 效果
-      isfilterLoading: false // font-awsome Loading 效果
+      modalType: 'new' // 判別開啟的 Modal 是新建、編輯、刪除
     }
+  },
+
+  computed: {
+    ...mapGetters(['isLoading', 'isfilterLoading'])
   },
 
   methods: {
     // 取得商品列表 /api/:api_path/admin/products?page=:page
     getProducts (page = 1) {
       const vm = this
-      vm.isLoading = true
+      this.$store.commit('LOADING', true)
       const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/admin/products?page=${page}`
       vm.$http.get(api).then((response) => {
         console.log('getProducts()', response.data)
         if (response.data.success) {
           vm.products = response.data.products
           vm.pagination = response.data.pagination
-          vm.isLoading = false
+          this.$store.commit('LOADING', false)
         } else {
           vm.$router.push('/login')
         }
@@ -310,13 +312,23 @@ export default {
         if (response.data.success) {
           if (vm.modalType === 'delete') {
             $('#delProductModal').modal('hide')
+            vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+              message: response.data.message,
+              status: 'danger'
+            })
           } else {
             $('#productModal').modal('hide')
+            vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+              message: response.data.message,
+              status: 'success'
+            })
           }
           vm.getProducts()
-          vm.$bus.$emit('messsage:push', response.data.message, 'success')
         } else {
-          vm.$bus.$emit('messsage:push', response.data.message, 'danger')
+          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: response.data.message,
+            status: 'danger'
+          })
         }
       })
     },
@@ -324,7 +336,7 @@ export default {
     // 上傳圖片 使用 formdata
     uploadFile () {
       const vm = this
-      vm.isfilterLoading = true
+      this.$store.commit('FILTER_LOADING', true)
       const uploadFile = vm.$refs.files.files[0]
       const formData = new FormData()
       formData.append('file-to-upload', uploadFile)
@@ -337,10 +349,10 @@ export default {
         console.log('uploadFile', response.data)
         if (response.data.success) {
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
-          vm.isfilterLoading = false
+          this.$store.commit('FILTER_LOADING', false)
         } else {
           this.$bus.$emit('messsage:push', '上傳失敗', 'danger')
-          vm.isfilterLoading = false
+          this.$store.commit('FILTER_LOADING', false)
         }
       })
     }

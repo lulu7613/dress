@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from './App.vue'
 import router from './router'
 import 'bootstrap'
@@ -8,12 +9,13 @@ import VeeValidate from 'vee-validate'
 import zhTW from 'vee-validate/dist/locale/zh_TW' // 語言包
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css' // vue-loading-overlay CSS 套件
-import store from './store'
+import store from './store/store'
 
 import currency from './filters/currency' // 千分位與$設定 filters.js
 import date from './filters/date'
 import './bus' // eventBus
 
+Vue.use(Vuex)
 Vue.use(vueAxios, axios)
 Vue.use(VeeValidate)
 VeeValidate.Validator.localize('zh-TW', zhTW) // 啟用語言包
