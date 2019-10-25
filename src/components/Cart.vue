@@ -109,7 +109,10 @@ export default {
       vm.$http.delete(api).then((response) => {
         console.log('刪除購物車', response.data)
         if (response.data.success) {
-          vm.$bus.$emit('messsage:push', response.data.message, 'success')
+          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: response.data.message,
+            status: 'danger'
+          })
           vm.getCarts()
           vm.filterLoadingItem = ''
           vm.isDisabled = ''

@@ -111,7 +111,10 @@ export default {
         if (response.data.success) {
           vm.filterLoadingItem = ''
           vm.isDisabled = ''
-          vm.$bus.$emit('messsage:push', response.data.message, 'success')
+          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: response.data.message,
+            status: 'success'
+          })
           vm.$bus.$emit('cartsQty:update')
         }
       })
@@ -123,7 +126,10 @@ export default {
       vm.myFavorite.push(item)
       localStorage.setItem('dressMyFavorite', JSON.stringify(vm.myFavorite))
       vm.$emit('emitFavoriteId', item.id)
-      vm.$bus.$emit('messsage:push', '商品加入我的最愛囉～', 'success')
+      vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+        message: '商品加入我的最愛囉～',
+        status: 'success'
+      })
     },
 
     // localStorage 移除我的最愛
@@ -136,7 +142,10 @@ export default {
       })
       localStorage.setItem('dressMyFavorite', JSON.stringify(vm.myFavorite))
       vm.$emit('emitFavoriteId', item.id)
-      vm.$bus.$emit('messsage:push', '商品從我的最愛移除！', 'danger')
+      vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+        message: '商品從我的最愛移除。',
+        status: 'danger'
+      })
     }
   }
 }

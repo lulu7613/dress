@@ -125,9 +125,16 @@ export default {
     sub (email) {
       const vm = this
       if (email !== '') {
-        vm.$bus.$emit('messsage:push', '訂閱成功', 'success')
+        vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+          message: '訂閱成功',
+          status: 'success'
+        })
       } else {
         vm.$bus.$emit('messsage:push', '要輸入您的 email 哦', 'danger')
+        vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+          message: '要輸入您的 email 哦',
+          status: 'danger'
+        })
       }
     }
   },

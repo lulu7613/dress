@@ -141,7 +141,10 @@ export default {
       vm.$http.delete(api).then((response) => {
         console.log('確認購物清單-刪除購物車', response.data)
         if (response.data.success) {
-          vm.$bus.$emit('messsage:push', response.data.message, 'success')
+          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: response.data.message,
+            status: 'danger'
+          })
           vm.getOrders()
           this.$bus.$emit('cartsQty:update')
           vm.filterLoadingItem = ''
@@ -160,11 +163,17 @@ export default {
       vm.$http.post(api, { data: coupon }).then((response) => {
         console.log('確認購物清單-套用優惠券', response.data)
         if (response.data.success) {
-          this.$bus.$emit('messsage:push', response.data.message, 'success')
-          this.getOrders()
-          this.couponCode = ''
+          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: response.data.message,
+            status: 'success'
+          })
+          vm.getOrders()
+          vm.couponCode = ''
         } else {
-          this.$bus.$emit('messsage:push', response.data.message, 'danger')
+          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: response.data.message,
+            status: 'danger'
+          })
         }
       })
     },

@@ -68,7 +68,10 @@ export default {
             if (response.data.success) {
               vm.$router.push('/admin/products')
             } else {
-              vm.$bus.$emit('messsage:push', response.data.message, 'danger')
+              vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+                message: response.data.message,
+                status: 'success'
+              })
             }
           })
         }

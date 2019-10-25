@@ -351,7 +351,10 @@ export default {
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
           this.$store.commit('FILTER_LOADING', false)
         } else {
-          this.$bus.$emit('messsage:push', '上傳失敗', 'danger')
+          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: '上傳失敗',
+            status: 'success'
+          })
           this.$store.commit('FILTER_LOADING', false)
         }
       })
