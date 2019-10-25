@@ -100,6 +100,7 @@
 <script>
 import Breadcrumb from '../components/Breadcrumb.vue'
 import ProductTemplate from '../components/ProductTemplate.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -113,13 +114,16 @@ export default {
       products: [],
       sameCategoryProducts: [],
       tempProduct: {},
-      isDisabled: '',
 
       myFavorite: JSON.parse(localStorage.getItem('dressMyFavorite')) || [],
 
-      filterLoadingItem: '',
       isLoading: false
     }
+  },
+
+  computed: {
+    ...mapGetters('Cart', ['isDisabled']),
+    ...mapGetters(['filterLoadingItem'])
   },
 
   methods: {
@@ -183,27 +187,11 @@ export default {
       })
     },
 
-    // 加入購物車 (qty 為 1) /api/:api_path/cart
+    // 加入購物車 /api/:api_path/cart
     addCart (id, qty = 1) {
-      const vm = this
-      vm.filterLoadingItem = id
-      vm.isDisabled = id
-      const postData = {
-        'product_id': id,
-        'qty': qty
-      }
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart`
-      vm.$http.post(api, { data: postData }).then((response) => {
-        console.log('加入購物車(temp)', response.data)
-        if (response.data.success) {
-          vm.filterLoadingItem = ''
-          vm.isDisabled = ''
-          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
-            message: response.data.message,
-            status: 'success'
-          })
-          vm.$bus.$emit('cartsQty:update')
-        }
+      this.$store.dispatch('Cart/CART_ADD', {
+        id,
+        qty
       })
     },
 

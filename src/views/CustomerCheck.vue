@@ -103,17 +103,21 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
       orders: {},
       ordersLen: 0,
       couponCode: '',
-      isLoading: false,
-      filterLoadingItem: '',
-      isDisabled: ''
-
+      isLoading: false
     }
+  },
+
+  computed: {
+    ...mapGetters('Cart', ['isDisabled']),
+    ...mapGetters(['filterLoadingItem'])
   },
 
   methods: {
@@ -134,23 +138,10 @@ export default {
 
     // 刪除某一筆購物車資料
     removeCart (id) {
-      const vm = this
-      vm.filterLoadingItem = id
-      vm.isDisabled = id
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart/${id}`
-      vm.$http.delete(api).then((response) => {
-        console.log('確認購物清單-刪除購物車', response.data)
-        if (response.data.success) {
-          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
-            message: response.data.message,
-            status: 'danger'
-          })
-          vm.getOrders()
-          this.$bus.$emit('cartsQty:update')
-          vm.filterLoadingItem = ''
-          vm.isDisabled = ''
-        }
-      })
+      this.$store.dispatch('Cart/CART_REMOVE', id)
+      setTimeout(() => {
+        this.getOrders()
+      }, 1800)
     },
 
     // 套用優惠券 /api/:api_path/coupon
@@ -181,7 +172,6 @@ export default {
     // 下一步 (去 customer_order)
     goOrder () {
       this.$router.push('/customer_order')
-      window.scroll(0, 0)
     }
 
   },

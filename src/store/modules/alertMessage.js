@@ -30,7 +30,6 @@ export default ({
   actions: {
     // 啟動 alertMessage
     MESSAGE_UPDATE (context, { message, status }) {
-      console.log(message, status)
       const timestamp = Math.floor(new Date() / 1000) // 產生 id
       context.commit('MESSAGE', { message, status, timestamp })
       context.dispatch('removeMessageWithTiming', timestamp) // 自動移除 alert

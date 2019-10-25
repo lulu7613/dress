@@ -67,70 +67,27 @@
 
 <script>
 import $ from 'jquery'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  data () {
-    return {
-      carts: [],
-      cartsQty: 0,
-
-      filterLoadingItem: '',
-      isDisabled: '',
-
-      animateCss: {
-        'animated': false,
-        'swing': false
-      }
-    }
+  computed: {
+    ...mapGetters('Cart', ['carts', 'cartsQty', 'animateCss', 'isDisabled']),
+    ...mapGetters(['filterLoadingItem'])
   },
 
   methods: {
     // 取得購物車列表 /api/:api_path/cart
-    getCarts () {
-      const vm = this
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart`
-      vm.$http.get(api).then((response) => {
-        console.log('購物車列表', response.data)
-        if (response.data.success) {
-          vm.carts = response.data.data
-          vm.cartsQty = response.data.data.carts.length
-          vm.animateCss.animated = false
-          vm.animateCss.swing = false
-        }
-      })
-    },
+    ...mapActions('Cart', ['CART_GET']),
 
     // 刪除某一筆購物車資料
     removeCart (id) {
-      const vm = this
-      vm.filterLoadingItem = id
-      vm.isDisabled = id
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart/${id}`
-      vm.$http.delete(api).then((response) => {
-        console.log('刪除購物車', response.data)
-        if (response.data.success) {
-          vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
-            message: response.data.message,
-            status: 'danger'
-          })
-          vm.getCarts()
-          vm.filterLoadingItem = ''
-          vm.isDisabled = ''
-        }
-      })
+      this.$store.dispatch('Cart/CART_REMOVE', id)
     },
 
     // 開啟 cart Modal
     openCartModal () {
-      this.getCarts()
+      this.CART_GET()
       $('#cartModal').modal('show')
-    },
-
-    // 更新 carts 的購買數量 cartsQty
-    uptadeCartsQty () {
-      this.getCarts()
-      this.animateCss.animated = true
-      this.animateCss.swing = true
     },
 
     // 進入結帳頁面 - 確認購物清單
@@ -142,13 +99,7 @@ export default {
   },
 
   created () {
-    this.getCarts()
-
-    // 自定義 $bus 觸發方法
-    const vm = this
-    vm.$bus.$on('cartsQty:update', () => {
-      vm.uptadeCartsQty()
-    })
+    this.CART_GET()
   }
 }
 </script>
