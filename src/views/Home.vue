@@ -67,13 +67,13 @@
       </div>
       <div class="row mt-5">
         <div class="col-md-6 mb-5">
-          <div class="home-overlay cursor-point" @click="goProducts('discount')">
+          <div class="home-overlay cursor-point" @click="goProducts('清倉55折')">
             <div class="home-overlay-title text-white text-center">查看詳情</div>
             <img src="../assets/img/coupon03.png" class="img-fluid" alt="coupon03" />
           </div>
         </div>
         <div class="col-md-6 mb-5">
-          <div class="home-overlay cursor-point" @click="goProducts('hot')">
+          <div class="home-overlay cursor-point" @click="goProducts('人氣精選')">
             <div class="home-overlay-title text-white text-center">查看詳情</div>
             <img src="../assets/img/coupon02.png" class="img-fluid" alt="coupon02" />
           </div>
@@ -105,12 +105,12 @@ export default {
   data () {
     return {
       email: '',
-      type: 'all'
+      type: ''
     }
   },
 
   methods: {
-    // 取得點選 關於翠絲 還是 購物商城
+    // 取得點選關於翠絲
     goPage (pathName) {
       this.$router.push(`/${pathName}`)
     },
