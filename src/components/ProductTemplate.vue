@@ -78,11 +78,11 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['propsData', 'propsFavorite'],
+  props: ['propsData'],
 
   data () {
     return {
-      myFavorite: [...this.propsFavorite],
+      myFavorite: JSON.parse(localStorage.getItem('dressMyFavorite')) || [],
       isFavorite: ''
     }
   },
@@ -96,7 +96,6 @@ export default {
     // 點擊查看更多到商品細項元件 CustomerProduct/:id
     goToProductPage (id) {
       this.$router.push(`/customer_product/${id}`)
-      this.myFavorite = [...this.propsFavorite]
       this.$emit('emit', id)
     },
 
