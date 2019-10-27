@@ -1,6 +1,5 @@
 <template>
   <main class="container my-5">
-    <loading :active.sync="isLoading"></loading>
     <!-- 步驟提示 -->
     <div class="form-row mt-5">
       <div class="col-sm">
@@ -41,8 +40,8 @@
               <strong>隱藏購物車細節</strong>
             </button>
             <div class="align-self-center mb-0 h4 font-weight-bold">
-              <span class="h6" v-if="orders.final_total !== orders.total">( 已折扣 )</span>
-              NT {{ orders.final_total | currency }}
+              <span class="h6" v-if="carts.final_total !== carts.total">( 已折扣 )</span>
+              NT {{ carts.final_total | currency }}
             </div>
           </div>
 
@@ -57,7 +56,7 @@
                   <th width="130" class="text-right">小計</th>
                 </thead>
                 <tbody>
-                  <tr v-for="item in orders.carts" :key="item.id">
+                  <tr v-for="item in carts.carts" :key="item.id">
                     <td>
                       <img :src="item.product.imageUrl" class="img-fluid" alt />
                     </td>
@@ -78,17 +77,17 @@
                     </td>
                     <td class="text-right">
                       <del
-                        v-if="orders.final_total !== orders.total"
-                      >NT {{ orders.total | currency }}</del>
-                      <strong v-else>NT {{ orders.total | currency }}</strong>
+                        v-if="carts.final_total !== carts.total"
+                      >NT {{ carts.total | currency }}</del>
+                      <strong v-else>NT {{ carts.total | currency }}</strong>
                     </td>
                   </tr>
-                  <tr v-if="orders.final_total !== orders.total">
+                  <tr v-if="carts.final_total !== carts.total">
                     <td colspan="3" class="text-right text-danger">
                       <strong>折扣價</strong>
                     </td>
                     <td class="text-right text-danger h5">
-                      <strong>NT {{ orders.final_total | currency }}</strong>
+                      <strong>NT {{ carts.final_total | currency }}</strong>
                     </td>
                   </tr>
                 </tfoot>
@@ -187,39 +186,25 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
-      orders: [],
       couponCode: '',
       form: {
         user: {}
-      },
-      isLoading: false,
-      filterLoadingItem: '',
-      isDisabled: ''
+      }
     }
+  },
+
+  computed: {
+    ...mapGetters('Cart', ['carts'])
   },
 
   methods: {
     // 取得訂單
-    getOrders () {
-      const vm = this
-      vm.isLoading = true
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart`
-      vm.$http.get(api).then((response) => {
-        console.log('填寫訂單資料-取得訂單', response.data)
-        if (response.data.success) {
-          if (response.data.data.carts.length === 0) {
-            vm.$router.push('/customer_products')
-            vm.isLoading = false
-          } else {
-            vm.orders = response.data.data
-            vm.isLoading = false
-          }
-        }
-      })
-    },
+    ...mapActions('Cart', ['CART_GET']),
 
     // 下一步: 送出訂單 /api/:api_path/order
     addCartOrder () {
@@ -247,7 +232,7 @@ export default {
   },
 
   created () {
-    this.getOrders()
+    this.CART_GET()
   }
 }
 </script>

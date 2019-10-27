@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 // 區域變數
 import Cart from './modules/cart'
 import Products from './modules/products'
+import Orders from './modules/order'
 
 // 全域變數
 import Loading from './modules/loading'
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     Loading,
     AlertMessage,
     Cart,
-    Products
+    Products,
+    Orders
   }
 })

@@ -1,6 +1,5 @@
 <template>
   <main class="container my-5">
-    <loading :active.sync="isLoading"></loading>
     <!-- 步驟提示 -->
     <div class="form-row my-5">
       <div class="col-sm">
@@ -30,7 +29,7 @@
     <div class="text-danger mb-4">全館年終大優惠，輸入999，商品一律打9折</div>
 
     <!-- 購物明細 -->
-    <div v-if="ordersLen > 0">
+    <div v-if="cartsQty > 0">
       <table class="table mt-3">
         <thead class="alert-light">
           <th width="50"></th>
@@ -40,7 +39,7 @@
           <th width="180" class="text-right">小計</th>
         </thead>
         <tbody>
-          <tr v-for="item in orders.carts" :key="item.id">
+          <tr v-for="item in carts.carts" :key="item.id">
             <td class="align-middle">
               <button
                 type="button"
@@ -71,16 +70,16 @@
               <strong>總計</strong>
             </td>
             <td class="text-right h5">
-              <del v-if="orders.final_total !== orders.total">NT {{ orders.total | currency }}</del>
-              <strong v-else>NT {{ orders.total | currency }}</strong>
+              <del v-if="carts.final_total !== carts.total">NT {{ carts.total | currency }}</del>
+              <strong v-else>NT {{ carts.total | currency }}</strong>
             </td>
           </tr>
-          <tr v-if="orders.final_total !== orders.total">
+          <tr v-if="carts.final_total !== carts.total">
             <td colspan="4" class="text-right text-danger h5">
               <strong>折扣價</strong>
             </td>
             <td class="text-right text-danger h4">
-              <strong>NT {{ orders.final_total | currency }}</strong>
+              <strong>NT {{ carts.final_total | currency }}</strong>
             </td>
           </tr>
         </tfoot>
@@ -103,45 +102,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      orders: {},
-      ordersLen: 0,
-      couponCode: '',
-      isLoading: false
+      couponCode: ''
     }
   },
 
   computed: {
-    ...mapGetters('Cart', ['isDisabled']),
+    ...mapGetters('Cart', ['carts', 'cartsQty', 'isDisabled']),
     ...mapGetters(['filterLoadingItem'])
   },
 
   methods: {
-    // 取得訂單
-    getOrders () {
-      const vm = this
-      vm.isLoading = true
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/cart`
-      vm.$http.get(api).then((response) => {
-        console.log('確認購物清單-取得訂單', response.data)
-        if (response.data.success) {
-          vm.orders = response.data.data
-          vm.ordersLen = response.data.data.carts.length
-          vm.isLoading = false
-        }
-      })
-    },
+    // 取得購物車列表
+    ...mapActions('Cart', ['CART_GET']),
 
     // 刪除某一筆購物車資料
     removeCart (id) {
       this.$store.dispatch('Cart/CART_REMOVE', id)
-      setTimeout(() => {
-        this.getOrders()
-      }, 1800)
     },
 
     // 套用優惠券 /api/:api_path/coupon
@@ -158,7 +139,7 @@ export default {
             message: response.data.message,
             status: 'success'
           })
-          vm.getOrders()
+          vm.ORDERS_GET()
           vm.couponCode = ''
         } else {
           vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
@@ -177,7 +158,7 @@ export default {
   },
 
   created () {
-    this.getOrders()
+    this.CART_GET()
   }
 }
 </script>

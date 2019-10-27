@@ -88,9 +88,9 @@ export default ({
             message: response.data.message,
             status: 'danger'
           }, { root: true })
-          context.dispatch('CART_GET')
           context.commit('FILTER_LOADING_ID', '', { root: true })
           context.commit('DISABLE', '')
+          context.dispatch('CART_GET')
         }
       })
     }

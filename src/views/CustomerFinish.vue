@@ -1,6 +1,5 @@
 <template>
   <main class="container my-5">
-    <loading :active.sync="isLoading"></loading>
     <!-- 步驟提示 -->
     <div class="form-row mt-5">
       <div class="col-sm">
@@ -109,42 +108,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  data () {
-    return {
-      order: [],
-      isLoading: false,
-      filterLoadingItem: '',
-      isDisabled: ''
-    }
+  computed: {
+    ...mapGetters('Orders', ['order'])
   },
 
   methods: {
-    // 取得訂單
+    // 取得單一筆結帳訂單
     getOrder () {
-      const vm = this
-      vm.isLoading = true
-      const orderId = vm.$route.params.orderId
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/order/${orderId}`
-      vm.$http.get(api).then((response) => {
-        console.log('完成訂單-取得訂單', response)
-        if (response.data.success) {
-          vm.order = response.data.order
-          vm.isLoading = false
-        }
-      })
+      const orderId = this.$route.params.orderId
+      this.$store.dispatch('Orders/ORDER_SINGLE_GET', orderId)
     },
 
     // 結帳付款
     payOrder () {
-      const vm = this
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/pay/${vm.order.id}`
-      this.$http.post(api, vm.order.id).then((response) => {
-        console.log('完成訂單-結帳付款', response.data)
-        if (response.data.success) {
-          vm.order.is_paid = true
-        }
-      })
+      const orderId = this.$route.params.orderId
+      this.$store.dispatch('Orders/ORDER_PAY', orderId)
     }
   },
 
