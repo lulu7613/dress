@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <Banner class="mb-5" />
     <div class="col-md-11 mx-auto mb-5">
       <div class="container-fluid">
@@ -211,6 +210,7 @@
 <script>
 import Banner from '../components/Banner.vue'
 import $ from 'jquery'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -219,26 +219,27 @@ export default {
 
   data () {
     return {
-      myOrders: [],
       tempOrder: [],
       type: 'all',
-      keyword: '',
-      isLoading: false
+      keyword: ''
     }
   },
 
   computed: {
+    ...mapGetters('Orders', ['myOrders']),
+
+    // 過濾我的訂單
     filterOrder () {
       const vm = this
       let data = []
-      if (vm.type === 'all') {
+      if (vm.type === 'all') { // 全部訂單
         data = vm.myOrders
-      } else if (vm.type === 'paid') {
+      } else if (vm.type === 'paid') { // 已付款
         data = vm.myOrders.filter(item => item.is_paid)
-      } else if (vm.type === 'noPaid') {
+      } else if (vm.type === 'noPaid') { // 未付款
         data = vm.myOrders.filter(item => !item.is_paid)
       } else {
-        data = vm.myOrders.filter(item => {
+        data = vm.myOrders.filter(item => { // 搜尋序號
           if (item.id === vm.keyword) {
             return true
           }
@@ -251,24 +252,7 @@ export default {
   methods: {
     // 取得商品列表 /api/:api_path/orders?page=:page
     getOrders (page = 1) {
-      const vm = this
-      vm.isLoading = true
-      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/orders?page=${page}`
-      vm.$http.get(api).then((response) => {
-        console.log('我的訂單-取得訂單列表', response.data.orders)
-        if (response.data.success) {
-          let localData = JSON.parse(localStorage.getItem('dressMyOrder')) // localStorage
-          // let arrC = arrA.filter(itemA => arrB.map(itemB => itemB.id).includes(itemA.id))
-          vm.myOrders = response.data.orders.filter(itemA => {
-            return localData.map(itemB => {
-              return itemB.id
-            }).includes(itemA.id)
-          })
-          vm.isLoading = false
-        } else {
-          vm.$router.push(`/customer_products`)
-        }
-      })
+      this.$store.dispatch('Orders/ORDERS_GET', page)
     },
 
     // 開啟 modla
@@ -286,7 +270,6 @@ export default {
     // 回首頁
     goHomePage () {
       this.$router.push('/customer_products')
-      window.scroll(0, 0)
     }
   },
 
