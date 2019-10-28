@@ -78,6 +78,26 @@ export default ({
           context.commit('PAY', true)
         }
       })
+    },
+
+    // 套用優惠券 coupon
+    COUPON_ADD (context, coupon) {
+      const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/coupon`
+      axios.post(api, { data: coupon }).then((response) => {
+        console.log('確認購物清單-套用優惠券', response.data)
+        if (response.data.success) {
+          context.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: response.data.message,
+            status: 'success'
+          }, { root: true })
+          console.log(context.dispatch('Cart/CART_GET'))
+        } else {
+          context.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
+            message: response.data.message,
+            status: 'danger'
+          }, { root: true })
+        }
+      })
     }
   }
 })
