@@ -90,7 +90,7 @@ export default ({
             message: response.data.message,
             status: 'success'
           }, { root: true })
-          context.dispatch('Cart/CART_GET', { root: true })
+          context.dispatch('Cart/CART_GET')
         } else {
           context.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
             message: response.data.message,
