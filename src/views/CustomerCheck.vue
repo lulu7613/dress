@@ -131,23 +131,6 @@ export default {
         'code': this.couponCode
       }
       this.$store.dispatch('Orders/COUPON_ADD', coupon)
-      // const api = `${process.env.VUE_APP_PATH}/api/${process.env.VUE_APP_ADMIN}/coupon`
-      // vm.$http.post(api, { data: coupon }).then((response) => {
-      //   console.log('確認購物清單-套用優惠券', response.data)
-      //   if (response.data.success) {
-      //     vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
-      //       message: response.data.message,
-      //       status: 'success'
-      //     })
-      //     vm.ORDERS_GET()
-      //     vm.couponCode = ''
-      //   } else {
-      //     vm.$store.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
-      //       message: response.data.message,
-      //       status: 'danger'
-      //     })
-      //   }
-      // })
     },
 
     // 下一步 (去 customer_order)

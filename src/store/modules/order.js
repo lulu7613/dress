@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cart from './cart'
 
 export default ({
   namespaced: true,
@@ -90,7 +91,8 @@ export default ({
             message: response.data.message,
             status: 'success'
           }, { root: true })
-          context.dispatch('Cart/CART_GET')
+          // dispatch 如要使用到 root ，就必須寫出三個參數，中間那一個如果沒有值可以使用 null
+          context.dispatch('Cart/CART_GET', null, { root: true })
         } else {
           context.dispatch('MESSAGE_UPDATE', { // vuex alertMessage
             message: response.data.message,
@@ -99,5 +101,9 @@ export default ({
         }
       })
     }
+  },
+
+  moudels: {
+    Cart
   }
 })
